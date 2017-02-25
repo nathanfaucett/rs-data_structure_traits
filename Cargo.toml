@@ -1,0 +1,11 @@
+[package]
+name = "collection_traits"
+version = "0.1.0"
+authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
+
+keywords = ["collection", "collections", "traits"]
+description = "collection traits"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/nathanfaucett/rs-collection_traits.git"
+homepage = "https://github.com/nathanfaucett/rs-collection_traits"
