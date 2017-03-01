@@ -1,8 +1,6 @@
-use core::iter::Iterator;
+use super::iterable::Iterable;
 
 
-pub trait IterableMut<'a> {
-    type Output: Iterator;
-
+pub trait IterableMut<'a>: Iterable<'a> {
     fn iter_mut(&'a mut self) -> Self::Output;
 }
