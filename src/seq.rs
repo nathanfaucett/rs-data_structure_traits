@@ -7,4 +7,4 @@ use super::iterable::Iterable;
 pub trait Seq<'a, Value>:
     Collection +
     Index<usize, Output = Value> +
-    Iterable<'a> {}
+    Iterable<'a, Value> {}

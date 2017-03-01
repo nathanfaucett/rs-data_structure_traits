@@ -11,4 +11,4 @@ pub trait SeqMut<'a, Value>:
     Insert<usize, Value> +
     Remove<usize, Output = Value> +
     IndexMut<usize, Output = Value> +
-    IterableMut<'a> {}
+    IterableMut<'a, Value> {}
