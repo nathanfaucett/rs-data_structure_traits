@@ -2,7 +2,7 @@ use core::iter::Iterator;
 
 
 pub trait Iterable<'a> {
-    type Output: Iterator;
+    type Iter: Iterator;
 
-    fn iter(&'a self) -> Self::Output;
+    fn iter(&'a self) -> Self::Iter;
 }
