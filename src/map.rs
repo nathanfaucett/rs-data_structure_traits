@@ -7,9 +7,9 @@ use super::iterable::Iterable;
 
 pub trait Map<'a, Key, BorrowKey, Value>:
     Collection +
-    Index<&'a Key, Output = Value> +
+    Index<&'a BorrowKey, Output = Value> +
     Iterable<'a, (&'a Key, &'a Value)>
-    
+
     where Key: 'a + Borrow<BorrowKey>,
           BorrowKey: 'a + ?Sized,
           Value: 'a,
