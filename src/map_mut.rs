@@ -1,4 +1,5 @@
 use core::ops::IndexMut;
+use core::borrow::Borrow;
 
 use super::insert::Insert;
 use super::iterable_mut::IterableMut;
@@ -6,9 +7,14 @@ use super::map::Map;
 use super::remove::Remove;
 
 
-pub trait MapMut<'a, Key: 'a, Value: 'a>:
-    Map<'a, Key, Value> +
+pub trait MapMut<'a, Key, BorrowKey, Value>:
+    Map<'a, Key, BorrowKey, Value> +
     Insert<Key, Value, Output = Option<Value>> +
-    Remove<&'a Key, Output = Value> +
+    Remove<&'a Key, Output = Option<Value>> +
     IndexMut<&'a Key, Output = Value> +
-    IterableMut<'a, (&'a Key, &'a mut Value)> {}
+    IterableMut<'a, (&'a Key, &'a mut Value)>
+
+    where Key: 'a + Borrow<BorrowKey>,
+          BorrowKey: 'a + ?Sized,
+          Value: 'a
+    {}
