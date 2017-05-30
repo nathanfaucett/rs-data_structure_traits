@@ -9,3 +9,6 @@ license = "MIT"
 readme = "README.md"
 repository = "https://github.com/nathanfaucett/rs-collection_traits.git"
 homepage = "https://github.com/nathanfaucett/rs-collection_traits"
+
+[features]
+no_std = []

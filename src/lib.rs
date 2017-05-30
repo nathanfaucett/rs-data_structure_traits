@@ -1,5 +1,16 @@
+#![feature(collections)]
+#![feature(custom_attribute)]
 #![no_std]
 
+
+#[cfg(not(feature = "no_std"))]
+extern crate std;
+
+extern crate collections;
+
+
+#[cfg(not(feature = "no_std"))]
+mod hash_map;
 
 mod collection_mut;
 mod collection;
@@ -9,6 +20,7 @@ mod insert_mut;
 mod insert;
 mod iterable_mut;
 mod iterable;
+mod linked_list;
 mod map_mut;
 mod map;
 mod queue_mut;
@@ -19,6 +31,7 @@ mod seq_mut;
 mod seq;
 mod stack_mut;
 mod stack;
+mod vec;
 
 
 pub use self::collection_mut::CollectionMut;
