@@ -1,14 +1,20 @@
-use core::ops::IndexMut;
+use core::ops::{Index, IndexMut};
 
-use super::insert::Insert;
+use super::collection_mut::CollectionMut;
+use super::insert_mut::InsertMut;
+use super::remove_mut::RemoveMut;
+use super::iterable::Iterable;
 use super::iterable_mut::IterableMut;
-use super::remove::Remove;
-use super::seq::Seq;
 
 
 pub trait SeqMut<'a, Value: 'a>:
-    Seq<'a, Value> +
-    Insert<usize, Value> +
-    Remove<usize, Output = Value> +
+    CollectionMut +
+
+    Index<usize, Output = Value> +
     IndexMut<usize, Output = Value> +
+
+    InsertMut<usize, Value> +
+    RemoveMut<usize, Output = Value> +
+
+    Iterable<'a, &'a Value> +
     IterableMut<'a, &'a mut Value> {}

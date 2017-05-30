@@ -1,20 +1,28 @@
-use core::ops::IndexMut;
+use core::ops::{Index, IndexMut};
 use core::borrow::Borrow;
 
-use super::insert::Insert;
+use super::collection_mut::CollectionMut;
+use super::insert_mut::InsertMut;
+use super::remove_mut::RemoveMut;
+use super::iterable::Iterable;
 use super::iterable_mut::IterableMut;
-use super::map::Map;
-use super::remove::Remove;
 
 
 pub trait MapMut<'a, Key, BorrowKey, Value>:
-    Map<'a, Key, BorrowKey, Value> +
-    Insert<Key, Value, Output = Option<Value>> +
-    Remove<&'a BorrowKey, Output = Option<Value>> +
+    CollectionMut +
+
+    InsertMut<Key, Value, Output = Option<Value>> +
+    RemoveMut<&'a BorrowKey, Output = Option<Value>> +
+
+    Index<&'a BorrowKey, Output = Value> +
     IndexMut<&'a BorrowKey, Output = Value> +
+
+    Iterable<'a, (&'a Key, &'a Value)> +
     IterableMut<'a, (&'a Key, &'a mut Value)>
 
     where Key: 'a + Borrow<BorrowKey>,
           BorrowKey: 'a + ?Sized,
           Value: 'a
-    {}
+{
+    fn contains_key(&self, k: &BorrowKey) -> bool;
+}
