@@ -14,5 +14,4 @@ pub trait Seq<'a, Value: 'a>:
     Insert<usize, Value> +
     Remove<usize> +
 
-    Iterable<'a, &'a Value> +
-    Iterable<'a, &'a mut Value> {}
+    Iterable<'a, &'a Value> {}
