@@ -31,6 +31,7 @@ mod seq_mut;
 mod seq;
 mod stack_mut;
 mod stack;
+mod string;
 mod vec;
 
 
