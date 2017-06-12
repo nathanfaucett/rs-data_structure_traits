@@ -5,11 +5,14 @@ use core::slice;
 use super::*;
 
 
-impl<T> CollectionMut for Vec<T> {
+impl<T> Collection for Vec<T> {
     #[inline(always)]
     fn len(&self) -> usize {
         self.len()
     }
+}
+
+impl<T> CollectionMut for Vec<T> {
     #[inline(always)]
     fn clear(&mut self) {
         self.truncate(0);

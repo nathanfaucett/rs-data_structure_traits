@@ -1,10 +1,6 @@
+use super::collection::Collection;
 
 
-pub trait CollectionMut {
-    fn len(&self) -> usize;
+pub trait CollectionMut: Collection {
     fn clear(&mut self);
-    #[inline(always)]
-    fn is_empty(&self) -> bool {
-        self.len() == 0
-    }
 }

@@ -5,7 +5,7 @@ use std::collections::hash_map::{HashMap, Iter, IterMut};
 use super::*;
 
 
-impl<K, V, S> CollectionMut for HashMap<K, V, S>
+impl<K, V, S> Collection for HashMap<K, V, S>
     where K: Eq + Hash,
           S: BuildHasher
 {
@@ -13,6 +13,12 @@ impl<K, V, S> CollectionMut for HashMap<K, V, S>
     fn len(&self) -> usize {
         self.len()
     }
+}
+
+impl<K, V, S> CollectionMut for HashMap<K, V, S>
+    where K: Eq + Hash,
+          S: BuildHasher
+{
     #[inline(always)]
     fn clear(&mut self) {
         self.drain();

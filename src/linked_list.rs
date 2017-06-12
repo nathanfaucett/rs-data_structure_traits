@@ -3,10 +3,12 @@ use collections::linked_list::{self, LinkedList};
 use super::*;
 
 
-impl<T> CollectionMut for LinkedList<T> {
+impl<T> Collection for LinkedList<T> {
     #[inline(always)]
     fn len(&self) -> usize { self.len() }
-    #[inline(always)]
+}
+
+impl<T> CollectionMut for LinkedList<T> {
     fn clear(&mut self) {
         while let Some(_) = self.pop_front() {}
     }
