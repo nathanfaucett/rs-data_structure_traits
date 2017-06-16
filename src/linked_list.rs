@@ -1,4 +1,4 @@
-use collections::linked_list::{self, LinkedList};
+use alloc::linked_list::{self, LinkedList};
 
 use super::*;
 

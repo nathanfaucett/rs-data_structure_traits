@@ -10,5 +10,8 @@ readme = "README.md"
 repository = "https://github.com/nathanfaucett/rs-collection_traits.git"
 homepage = "https://github.com/nathanfaucett/rs-collection_traits"
 
+[dependencies]
+[dev-dependencies]
+
 [features]
 no_std = []

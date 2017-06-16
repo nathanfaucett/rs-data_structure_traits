@@ -1,4 +1,4 @@
-#![feature(collections)]
+#![feature(alloc)]
 #![feature(custom_attribute)]
 #![no_std]
 
@@ -6,7 +6,7 @@
 #[cfg(not(feature = "no_std"))]
 extern crate std;
 
-extern crate collections;
+extern crate alloc;
 
 
 #[cfg(not(feature = "no_std"))]

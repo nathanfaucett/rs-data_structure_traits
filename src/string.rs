@@ -1,4 +1,4 @@
-use collections::string::String;
+use alloc::string::String;
 
 use core::str::{self, Chars};
 
