@@ -1,6 +1,7 @@
 use alloc::vec::Vec;
 
 use core::slice;
+use core::ops::{Index, IndexMut};
 
 use super::*;
 
@@ -8,38 +9,38 @@ use super::*;
 impl<T> Collection for Vec<T> {
     #[inline(always)]
     fn len(&self) -> usize {
-        self.len()
+        Vec::<T>::len(self)
     }
 }
 
 impl<T> CollectionMut for Vec<T> {
     #[inline(always)]
     fn clear(&mut self) {
-        self.truncate(0);
+        Vec::<T>::truncate(self, 0);
     }
 }
 
 impl<T> DequeMut<T> for Vec<T> {
     #[inline(always)]
     fn push_front(&mut self, element: T) {
-        self.insert(0, element)
+        Vec::<T>::insert(self, 0, element)
     }
     #[inline(always)]
     fn push_back(&mut self, element: T) {
-        self.push(element)
+        Vec::<T>::push(self, element)
     }
 
     #[inline(always)]
     fn pop_front(&mut self) -> Option<T> {
-        if self.len() == 0 {
+        if Vec::<T>::len(self) == 0 {
             None
         } else {
-            Some(self.remove(0))
+            Some(Vec::<T>::remove(self, 0))
         }
     }
     #[inline(always)]
     fn pop_back(&mut self) -> Option<T> {
-        self.pop()
+        Vec::<T>::pop(self)
     }
 
     #[inline(always)]
@@ -66,7 +67,7 @@ impl<T> InsertMut<usize, T> for Vec<T> {
 
     #[inline(always)]
     fn insert(&mut self, index: usize, element: T) -> Self::Output {
-        self.insert(index, element)
+        Vec::<T>::insert(self, index, element)
     }
 }
 
@@ -75,30 +76,45 @@ impl<T> RemoveMut<usize> for Vec<T> {
 
     #[inline(always)]
     fn remove(&mut self, index: usize) -> Self::Output {
-        self.remove(index)
+        Vec::<T>::remove(self, index)
     }
 }
 
 impl<T> StackMut<T> for Vec<T> {
     #[inline(always)]
-    fn push(&mut self, element: T) { self.push_front(element) }
+    fn push(&mut self, element: T) { Vec::<T>::push_front(self, element) }
     #[inline(always)]
-    fn pop(&mut self) -> Option<T> { self.pop_front() }
+    fn pop(&mut self) -> Option<T> { Vec::<T>::pop_front(self) }
     #[inline(always)]
-    fn top(&self) -> Option<&T> { self.front() }
+    fn top(&self) -> Option<&T> { Vec::<T>::front(self) }
     #[inline(always)]
-    fn top_mut(&mut self) -> Option<&mut T> { self.front_mut() }
+    fn top_mut(&mut self) -> Option<&mut T> { Vec::<T>::front_mut(self) }
 }
 
 impl<T> QueueMut<T> for Vec<T> {
     #[inline(always)]
-    fn enqueue(&mut self, element: T) { self.push_back(element) }
+    fn enqueue(&mut self, element: T) { Vec::<T>::push_back(self, element) }
     #[inline(always)]
-    fn dequeue(&mut self) -> Option<T> { self.pop_front() }
+    fn dequeue(&mut self) -> Option<T> { Vec::<T>::pop_front(self) }
     #[inline(always)]
-    fn peek(&self) -> Option<&T> { self.front() }
+    fn peek(&self) -> Option<&T> { Vec::<T>::front(self) }
     #[inline(always)]
-    fn peek_mut(&mut self) -> Option<&mut T> { self.front_mut() }
+    fn peek_mut(&mut self) -> Option<&mut T> { Vec::<T>::front_mut(self) }
+}
+
+impl<T> Get<usize> for Vec<T> {
+    type Output = T;
+
+    #[inline(always)]
+    fn get(&self, index: usize) -> &Self::Output {
+        Index::index(self, index)
+    }
+}
+impl<T> GetMut<usize> for Vec<T> {
+    #[inline(always)]
+    fn get_mut(&mut self, index: usize) -> &mut Self::Output {
+        IndexMut::index_mut(self, index)
+    }
 }
 
 impl<'a, T: 'a> Iterable<'a, &'a T> for Vec<T> {

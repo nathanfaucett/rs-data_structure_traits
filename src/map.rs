@@ -1,25 +1,25 @@
-use core::ops::Index;
 use core::borrow::Borrow;
 
 use super::collection::Collection;
+use super::get::Get;
 use super::insert::Insert;
 use super::remove::Remove;
 use super::iterable::Iterable;
 
 
-pub trait Map<'a, Key, BorrowKey, Value>:
+pub trait Map<'a, K, Q: ?Sized, V>:
     Collection +
 
-    Insert<Key, Value, Output = Option<Value>> +
-    Remove<&'a BorrowKey> +
+    Insert<K, V, Output = Option<V>> +
+    Remove<&'a Q> +
 
-    Index<&'a BorrowKey, Output = Value> +
+    Get<&'a Q, Output = V> +
 
-    Iterable<'a, (&'a Key, &'a Value)>
+    Iterable<'a, (&'a K, &'a V)>
 
-    where Key: 'a + Borrow<BorrowKey>,
-          BorrowKey: 'a + ?Sized,
-          Value: 'a
+    where K: 'a + Borrow<Q>,
+          Q: 'a,
+          V: 'a
 {
-    fn contains_key(&self, k: &BorrowKey) -> bool;
+    fn contains_key(&self, k: &Q) -> bool;
 }

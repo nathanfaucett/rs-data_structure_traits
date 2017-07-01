@@ -11,7 +11,7 @@ impl<K, V, S> Collection for HashMap<K, V, S>
 {
     #[inline(always)]
     fn len(&self) -> usize {
-        self.len()
+        HashMap::<K, V, S>::len(self)
     }
 }
 
@@ -21,7 +21,7 @@ impl<K, V, S> CollectionMut for HashMap<K, V, S>
 {
     #[inline(always)]
     fn clear(&mut self) {
-        self.drain();
+        HashMap::<K, V, S>::drain(self);
     }
 }
 
@@ -33,7 +33,7 @@ impl<'a, K, V, S> InsertMut<K, V> for HashMap<K, V, S>
 
     #[inline]
     fn insert(&mut self, k: K, v: V) -> Self::Output {
-        self.insert(k, v)
+        HashMap::<K, V, S>::insert(self, k, v)
     }
 }
 
@@ -46,7 +46,30 @@ impl<'a, K, Q: ?Sized, V, S> RemoveMut<&'a Q> for HashMap<K, V, S>
 
     #[inline]
     fn remove(&mut self, k: &Q) -> Self::Output {
-        self.remove(k)
+        HashMap::<K, V, S>::remove(self, k)
+    }
+}
+
+impl<'a, K, Q: ?Sized, V, S> Get<&'a Q> for HashMap<K, V, S>
+    where K: Eq + Hash + Borrow<Q>,
+          Q: Eq + Hash,
+          S: BuildHasher,
+{
+    type Output = V;
+
+    #[inline(always)]
+    fn get(&self, k: &Q) -> &Self::Output {
+        HashMap::get(self, k).expect("no entry")
+    }
+}
+impl<'a, K, Q: ?Sized, V, S> GetMut<&'a Q> for HashMap<K, V, S>
+    where K: Eq + Hash + Borrow<Q>,
+          Q: Eq + Hash,
+          S: BuildHasher,
+{
+    #[inline(always)]
+    fn get_mut(&mut self, k: &Q) -> &mut Self::Output {
+        HashMap::get_mut(self, k).expect("no entry")
     }
 }
 
@@ -59,7 +82,7 @@ impl<'a, K, V, S> Iterable<'a, (&'a K, &'a V)> for HashMap<K, V, S>
 
     #[inline(always)]
     fn iter(&'a self) -> Self::Iter {
-        self.iter()
+        HashMap::<K, V, S>::iter(self)
     }
 }
 
@@ -72,6 +95,18 @@ impl<'a, K, V, S> IterableMut<'a, (&'a K, &'a mut V)> for HashMap<K, V, S>
 
     #[inline(always)]
     fn iter_mut(&'a mut self) -> Self::IterMut {
-        self.iter_mut()
+        HashMap::<K, V, S>::iter_mut(self)
+    }
+}
+
+impl<'a, K, Q: ?Sized, V, S> MapMut<'a, K, Q, V> for HashMap<K, V, S>
+    where K: 'a + Eq + Hash + Borrow<Q>,
+          Q: 'a + Eq + Hash,
+          V: 'a,
+          S: 'a + BuildHasher,
+{
+    #[inline(always)]
+    fn contains_key(&self, k: &Q) -> bool {
+        HashMap::contains_key(self, k)
     }
 }

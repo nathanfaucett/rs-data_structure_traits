@@ -1,6 +1,6 @@
 use super::collection::Collection;
 
 
-pub trait Remove<Key: ?Sized>: Collection {
-    fn remove(&self, key: Key) -> Self;
+pub trait Remove<K: ?Sized>: Collection {
+    fn remove(&self, key: K) -> Self;
 }

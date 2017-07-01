@@ -1,8 +1,8 @@
 use super::collection_mut::CollectionMut;
 
 
-pub trait InsertMut<Key, Value>: CollectionMut {
+pub trait InsertMut<K, V>: CollectionMut {
     type Output;
 
-    fn insert(&mut self, key: Key, element: Value) -> Self::Output;
+    fn insert(&mut self, key: K, element: V) -> Self::Output;
 }

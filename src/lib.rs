@@ -3,19 +3,20 @@
 #![no_std]
 
 
-#[cfg(not(feature = "no_std"))]
-extern crate std;
+#[cfg(not(feature = "no_std"))] extern crate std;
 
 extern crate alloc;
 
 
-#[cfg(not(feature = "no_std"))]
-mod hash_map;
+#[cfg(not(feature = "no_std"))] mod hash_map;
+#[cfg(not(feature = "no_std"))] mod hash_set;
 
 mod collection_mut;
 mod collection;
 mod deque_mut;
 mod deque;
+mod get_mut;
+mod get;
 mod insert_mut;
 mod insert;
 mod iterable_mut;
@@ -39,6 +40,8 @@ pub use self::collection_mut::CollectionMut;
 pub use self::collection::Collection;
 pub use self::deque_mut::DequeMut;
 pub use self::deque::Deque;
+pub use self::get_mut::GetMut;
+pub use self::get::Get;
 pub use self::insert_mut::InsertMut;
 pub use self::insert::Insert;
 pub use self::iterable_mut::IterableMut;
