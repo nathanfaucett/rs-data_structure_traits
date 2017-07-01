@@ -1,7 +1,6 @@
 use alloc::vec::Vec;
 
 use core::slice;
-use core::ops::{Index, IndexMut};
 
 use super::*;
 
@@ -106,14 +105,22 @@ impl<T> Get<usize> for Vec<T> {
     type Output = T;
 
     #[inline(always)]
-    fn get(&self, index: usize) -> &Self::Output {
-        Index::index(self, index)
+    fn get(&self, index: usize) -> Option<&Self::Output> {
+        if index < self.len() {
+            Some(unsafe { self.get_unchecked(index) })
+        } else {
+            None
+        }
     }
 }
 impl<T> GetMut<usize> for Vec<T> {
     #[inline(always)]
-    fn get_mut(&mut self, index: usize) -> &mut Self::Output {
-        IndexMut::index_mut(self, index)
+    fn get_mut(&mut self, index: usize) -> Option<&mut Self::Output> {
+        if index < self.len() {
+            Some(unsafe { self.get_unchecked_mut(index) })
+        } else {
+            None
+        }
     }
 }
 

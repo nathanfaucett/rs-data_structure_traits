@@ -58,8 +58,8 @@ impl<'a, K, Q: ?Sized, V, S> Get<&'a Q> for HashMap<K, V, S>
     type Output = V;
 
     #[inline(always)]
-    fn get(&self, k: &Q) -> &Self::Output {
-        HashMap::get(self, k).expect("no entry")
+    fn get(&self, k: &Q) -> Option<&Self::Output> {
+        HashMap::get(self, k)
     }
 }
 impl<'a, K, Q: ?Sized, V, S> GetMut<&'a Q> for HashMap<K, V, S>
@@ -68,8 +68,8 @@ impl<'a, K, Q: ?Sized, V, S> GetMut<&'a Q> for HashMap<K, V, S>
           S: BuildHasher,
 {
     #[inline(always)]
-    fn get_mut(&mut self, k: &Q) -> &mut Self::Output {
-        HashMap::get_mut(self, k).expect("no entry")
+    fn get_mut(&mut self, k: &Q) -> Option<&mut Self::Output> {
+        HashMap::get_mut(self, k)
     }
 }
 

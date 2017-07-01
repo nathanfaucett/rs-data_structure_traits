@@ -5,5 +5,5 @@ pub trait Get<K>
 {
     type Output: ?Sized;
 
-    fn get(&self, K) -> &Self::Output;
+    fn get(&self, K) -> Option<&Self::Output>;
 }

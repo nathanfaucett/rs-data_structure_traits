@@ -110,14 +110,14 @@ impl<T> Get<usize> for LinkedList<T> {
     type Output = T;
 
     #[inline]
-    fn get(&self, index: usize) -> &Self::Output {
-        LinkedList::<T>::iter(self).nth(index).expect("index out of bounds")
+    fn get(&self, index: usize) -> Option<&Self::Output> {
+        LinkedList::<T>::iter(self).nth(index)
     }
 }
 impl<T> GetMut<usize> for LinkedList<T> {
     #[inline]
-    fn get_mut(&mut self, index: usize) -> &mut Self::Output {
-        LinkedList::<T>::iter_mut(self).nth(index).expect("index out of bounds")
+    fn get_mut(&mut self, index: usize) -> Option<&mut Self::Output> {
+        LinkedList::<T>::iter_mut(self).nth(index)
     }
 }
 
