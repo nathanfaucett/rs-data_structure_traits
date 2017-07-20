@@ -11,6 +11,9 @@ extern crate alloc;
 #[cfg(not(feature = "no_std"))] mod hash_map;
 #[cfg(not(feature = "no_std"))] mod hash_set;
 
+
+mod btree_map;
+mod btree_set;
 mod collection_mut;
 mod collection;
 mod deque_mut;
