@@ -6,6 +6,7 @@ use super::*;
 
 
 impl<'a> Collection for &'a str {
+    
     #[inline(always)]
     fn len(&self) -> usize {
         str::len(self)
@@ -23,6 +24,7 @@ impl<'a> Iterable<'a, char> for &'a str {
 
 
 impl Collection for String {
+
     #[inline(always)]
     fn len(&self) -> usize {
         String::len(self)
@@ -30,6 +32,7 @@ impl Collection for String {
 }
 
 impl CollectionMut for String {
+
     #[inline(always)]
     fn clear(&mut self) {
         String::clear(self)
@@ -41,7 +44,7 @@ impl InsertMut<usize, char> for String {
 
     #[inline(always)]
     fn insert(&mut self, index: usize, element: char) -> Self::Output {
-        self.insert(index, element)
+        String::insert(self, index, element)
     }
 }
 
@@ -50,7 +53,7 @@ impl RemoveMut<usize> for String {
 
     #[inline(always)]
     fn remove(&mut self, index: usize) -> Self::Output {
-        self.remove(index)
+        String::remove(self, index)
     }
 }
 

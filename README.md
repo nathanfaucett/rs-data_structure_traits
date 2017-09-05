@@ -1,4 +1,4 @@
-collection_traits [![Build Status](https://travis-ci.org/nathanfaucett/rs-collection_traits.svg?branch=master)](https://travis-ci.org/nathanfaucett/rs-collection_traits)
+data_structure_traits [![Build Status](https://travis-ci.org/nathanfaucett/rs-data_structure_traits.svg?branch=master)](https://travis-ci.org/nathanfaucett/rs-data_structure_traits)
 =====
 
-collection traits
+data structure collection traits
