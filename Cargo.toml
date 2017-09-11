@@ -1,6 +1,6 @@
 [package]
 name = "data_structure_traits"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
 
 keywords = ["data", "structure", "collection", "collections", "traits"]
@@ -14,4 +14,5 @@ homepage = "https://gitlab.com/nathanfaucett/rs-data_structure_traits"
 [dev-dependencies]
 
 [features]
-no_std = []
+use_std = []
+default = ["use_std"]

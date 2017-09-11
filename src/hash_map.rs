@@ -25,6 +25,29 @@ impl<K, V, S> CollectionMut for HashMap<K, V, S>
     }
 }
 
+impl<K, V> Create for HashMap<K, V>
+    where K: Eq + Hash
+{
+    #[inline(always)]
+    fn create() -> Self {
+        HashMap::<K, V>::new()
+    }
+    #[inline(always)]
+    fn create_with_capacity(capacity: usize) -> Self {
+        HashMap::<K, V>::with_capacity(capacity)
+    }
+}
+
+impl<K, V, S> AddElementMut<(K, V)> for HashMap<K, V, S>
+    where K: Eq + Hash,
+          S: BuildHasher
+{
+    #[inline(always)]
+    fn add_element(&mut self, (key, value): (K, V)) {
+        HashMap::<K, V, S>::insert(self, key, value);
+    }
+}
+
 impl<'a, K, V, S> InsertMut<K, V> for HashMap<K, V, S>
     where K: Eq + Hash,
           S: BuildHasher

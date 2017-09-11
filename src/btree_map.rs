@@ -23,6 +23,28 @@ impl<K, V> CollectionMut for BTreeMap<K, V>
     }
 }
 
+impl<K, V> Create for BTreeMap<K, V>
+    where K: Eq + Ord,
+{
+    #[inline(always)]
+    fn create() -> Self {
+        BTreeMap::<K, V>::new()
+    }
+    #[inline(always)]
+    fn create_with_capacity(_: usize) -> Self {
+        BTreeMap::<K, V>::new()
+    }
+}
+
+impl<K, V> AddElementMut<(K, V)> for BTreeMap<K, V>
+    where K: Eq + Ord,
+{
+    #[inline(always)]
+    fn add_element(&mut self, (key, value): (K, V)) {
+        BTreeMap::<K, V>::insert(self, key, value);
+    }
+}
+
 impl<'a, K, V> InsertMut<K, V> for BTreeMap<K, V>
     where K: Eq + Ord,
 {

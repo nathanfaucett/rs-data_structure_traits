@@ -1,21 +1,25 @@
 #![feature(alloc)]
+#![feature(core_slice_ext)]
 #![feature(custom_attribute)]
 #![no_std]
 
 
-#[cfg(not(feature = "no_std"))] extern crate std;
+#[cfg(feature = "use_std")] extern crate std;
 
 extern crate alloc;
 
 
-#[cfg(not(feature = "no_std"))] mod hash_map;
-#[cfg(not(feature = "no_std"))] mod hash_set;
+#[cfg(feature = "use_std")] mod hash_map;
+#[cfg(feature = "use_std")] mod hash_set;
 
 
+mod add_element_mut;
+mod add_element;
 mod btree_map;
 mod btree_set;
 mod collection_mut;
 mod collection;
+mod create;
 mod deque_mut;
 mod deque;
 mod get_mut;
@@ -25,6 +29,7 @@ mod insert;
 mod iterable_mut;
 mod iterable;
 mod linked_list;
+#[macro_use] mod macros;
 mod map_mut;
 mod map;
 mod queue_mut;
@@ -33,14 +38,18 @@ mod remove_mut;
 mod remove;
 mod seq_mut;
 mod seq;
+mod slice;
 mod stack_mut;
 mod stack;
 mod string;
 mod vec;
 
 
+pub use self::add_element_mut::AddElementMut;
+pub use self::add_element::AddElement;
 pub use self::collection_mut::CollectionMut;
 pub use self::collection::Collection;
+pub use self::create::Create;
 pub use self::deque_mut::DequeMut;
 pub use self::deque::Deque;
 pub use self::get_mut::GetMut;

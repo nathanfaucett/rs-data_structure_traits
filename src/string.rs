@@ -6,7 +6,7 @@ use super::*;
 
 
 impl<'a> Collection for &'a str {
-    
+
     #[inline(always)]
     fn len(&self) -> usize {
         str::len(self)
@@ -36,6 +36,24 @@ impl CollectionMut for String {
     #[inline(always)]
     fn clear(&mut self) {
         String::clear(self)
+    }
+}
+
+impl Create for String {
+    #[inline(always)]
+    fn create() -> Self {
+        String::new()
+    }
+    #[inline(always)]
+    fn create_with_capacity(capacity: usize) -> Self {
+        String::with_capacity(capacity)
+    }
+}
+
+impl AddElementMut<char> for String {
+    #[inline(always)]
+    fn add_element(&mut self, element: char) {
+        String::push(self, element)
     }
 }
 

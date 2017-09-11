@@ -14,6 +14,24 @@ impl<T> CollectionMut for LinkedList<T> {
     }
 }
 
+impl<T> Create for LinkedList<T> {
+    #[inline(always)]
+    fn create() -> Self {
+        LinkedList::<T>::new()
+    }
+    #[inline(always)]
+    fn create_with_capacity(_: usize) -> Self {
+        LinkedList::<T>::new()
+    }
+}
+
+impl<V> AddElementMut<V> for LinkedList<V> {
+    #[inline(always)]
+    fn add_element(&mut self, element: V) {
+        LinkedList::<V>::push(self, element);
+    }
+}
+
 impl<T> DequeMut<T> for LinkedList<T> {
     #[inline(always)]
     fn push_front(&mut self, element: T) {

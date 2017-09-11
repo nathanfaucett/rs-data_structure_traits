@@ -19,6 +19,24 @@ impl<T> CollectionMut for Vec<T> {
     }
 }
 
+impl<T> Create for Vec<T> {
+    #[inline(always)]
+    fn create() -> Self {
+        Vec::<T>::new()
+    }
+    #[inline(always)]
+    fn create_with_capacity(capacity: usize) -> Self {
+        Vec::<T>::with_capacity(capacity)
+    }
+}
+
+impl<V> AddElementMut<V> for Vec<V> {
+    #[inline(always)]
+    fn add_element(&mut self, element: V) {
+        Vec::<V>::push(self, element);
+    }
+}
+
 impl<T> DequeMut<T> for Vec<T> {
     #[inline(always)]
     fn push_front(&mut self, element: T) {
