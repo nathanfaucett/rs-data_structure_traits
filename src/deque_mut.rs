@@ -1,9 +1,8 @@
-use super::collection_mut::CollectionMut;
 
 
-pub trait DequeMut<T>: CollectionMut {
-    fn push_front(&mut self, element: T);
-    fn push_back(&mut self, element: T);
+pub trait DequeMut<T> {
+    fn push_front(&mut self, T);
+    fn push_back(&mut self, T);
 
     fn pop_front(&mut self) -> Option<T>;
     fn pop_back(&mut self) -> Option<T>;

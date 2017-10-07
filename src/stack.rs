@@ -1,8 +1,7 @@
-use super::collection::Collection;
 
 
-pub trait Stack<T>: Collection {
-    fn push(&self, element: T) -> Self;
+pub trait Stack<T> {
+    fn push(&self, T) -> Self;
     fn pop(&self) -> Self;
 
     fn top(&self) -> Option<&T>;

@@ -1,8 +1,8 @@
-use super::collection::Collection;
 
 
-pub trait Insert<K, V>: Collection {
-    type Output;
-
-    fn insert(&self, key: K, element: V) -> Self::Output;
+pub trait Insert<K, V>
+    where K: ?Sized,
+          V: ?Sized,
+{
+    fn insert(&self, K, V) -> Self;
 }

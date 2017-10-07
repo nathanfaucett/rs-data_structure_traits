@@ -1,8 +1,7 @@
-use super::collection::Collection;
 
 
-pub trait Queue<T>: Collection {
-    fn enqueue(&self, element: T) -> Self;
+pub trait Queue<T> {
+    fn enqueue(&self, T) -> Self;
     fn dequeue(&self) -> Self;
     fn peek(&self) -> Option<&T>;
 }

@@ -2,7 +2,7 @@ use alloc::vec::Vec;
 
 use core::slice;
 
-use super::*;
+use super::super::*;
 
 
 impl<T> Collection for Vec<T> {
@@ -19,21 +19,16 @@ impl<T> CollectionMut for Vec<T> {
     }
 }
 
-impl<T> Create for Vec<T> {
-    #[inline(always)]
-    fn create() -> Self {
-        Vec::<T>::new()
-    }
-    #[inline(always)]
-    fn create_with_capacity(capacity: usize) -> Self {
-        Vec::<T>::with_capacity(capacity)
-    }
-}
+impl<T> Create<T> for Vec<T> {
 
-impl<V> AddElementMut<V> for Vec<V> {
     #[inline(always)]
-    fn add_element(&mut self, element: V) {
-        Vec::<V>::push(self, element);
+    fn create() -> Self { Vec::<T>::new() }
+    #[inline(always)]
+    fn create_with_capacity(capacity: usize) -> Self { Vec::<T>::with_capacity(capacity) }
+
+    #[inline(always)]
+    fn add_element(&mut self, value: T) {
+        Vec::<T>::push(self, value);
     }
 }
 
@@ -161,3 +156,4 @@ impl<'a, T: 'a> IterableMut<'a, &'a mut T> for Vec<T> {
 }
 
 impl<'a, T: 'a> SeqMut<'a, T> for Vec<T> {}
+impl<'a, T: 'a> Seq<'a, T> for Vec<T> {}

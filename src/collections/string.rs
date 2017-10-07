@@ -2,7 +2,7 @@ use alloc::string::String;
 
 use core::str::{self, Chars};
 
-use super::*;
+use super::super::*;
 
 
 impl<'a> Collection for &'a str {
@@ -39,21 +39,16 @@ impl CollectionMut for String {
     }
 }
 
-impl Create for String {
-    #[inline(always)]
-    fn create() -> Self {
-        String::new()
-    }
-    #[inline(always)]
-    fn create_with_capacity(capacity: usize) -> Self {
-        String::with_capacity(capacity)
-    }
-}
+impl Create<char> for String {
 
-impl AddElementMut<char> for String {
     #[inline(always)]
-    fn add_element(&mut self, element: char) {
-        String::push(self, element)
+    fn create() -> Self { String::new() }
+    #[inline(always)]
+    fn create_with_capacity(capacity: usize) -> Self { String::with_capacity(capacity) }
+
+    #[inline(always)]
+    fn add_element(&mut self, ch: char) {
+        String::push(self, ch);
     }
 }
 

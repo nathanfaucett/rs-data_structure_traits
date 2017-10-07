@@ -1,7 +1,7 @@
 use core::slice;
 use core::slice::SliceExt;
 
-use super::*;
+use super::super::*;
 
 
 impl<T> Collection for [T] {
@@ -14,7 +14,7 @@ impl<T> Collection for [T] {
 impl<T> Get<usize> for [T] {
     type Output = T;
 
-    #[inline(always)]
+    #[inline]
     fn get(&self, index: usize) -> Option<&Self::Output> {
         if index < self.len() {
             Some(unsafe { self.get_unchecked(index) })
@@ -24,7 +24,7 @@ impl<T> Get<usize> for [T] {
     }
 }
 impl<T> GetMut<usize> for [T] {
-    #[inline(always)]
+    #[inline]
     fn get_mut(&mut self, index: usize) -> Option<&mut Self::Output> {
         if index < self.len() {
             Some(unsafe { self.get_unchecked_mut(index) })

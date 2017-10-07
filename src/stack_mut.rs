@@ -1,8 +1,7 @@
-use super::collection_mut::CollectionMut;
 
 
-pub trait StackMut<T>: CollectionMut {
-    fn push(&mut self, element: T);
+pub trait StackMut<T> {
+    fn push(&mut self, T);
     fn pop(&mut self) -> Option<T>;
 
     fn top(&self) -> Option<&T>;

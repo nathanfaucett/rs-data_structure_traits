@@ -20,8 +20,9 @@ fn test_get() {
 
     let map: BTreeMap<usize, usize> = collection!{0 => 0};
     assert_eq!(get(&map, &0), Some(&0));
-    let map: HashMap<usize, usize> = collection!{0 => 0};
-    assert_eq!(get(&map, &0), Some(&0));
+
+    let map: HashMap<String, String> = collection!{"0".into() => "0".into()};
+    assert_eq!(get(&map, "0"), Some(&String::from("0")));
 
     let _: BTreeSet<usize> = collection![0];
     let _: HashSet<usize> = collection![0];

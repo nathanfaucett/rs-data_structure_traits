@@ -1,6 +1,6 @@
 use alloc::linked_list::{self, LinkedList};
 
-use super::*;
+use super::super::*;
 
 
 impl<T> Collection for LinkedList<T> {
@@ -14,21 +14,16 @@ impl<T> CollectionMut for LinkedList<T> {
     }
 }
 
-impl<T> Create for LinkedList<T> {
-    #[inline(always)]
-    fn create() -> Self {
-        LinkedList::<T>::new()
-    }
-    #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self {
-        LinkedList::<T>::new()
-    }
-}
+impl<T> Create<T> for LinkedList<T> {
 
-impl<V> AddElementMut<V> for LinkedList<V> {
     #[inline(always)]
-    fn add_element(&mut self, element: V) {
-        LinkedList::<V>::push(self, element);
+    fn create() -> Self { LinkedList::<T>::new() }
+    #[inline(always)]
+    fn create_with_capacity(_: usize) -> Self { LinkedList::<T>::new() }
+
+    #[inline(always)]
+    fn add_element(&mut self, value: T) {
+        LinkedList::<T>::push(self, value);
     }
 }
 
@@ -158,3 +153,4 @@ impl<'a, T: 'a> IterableMut<'a, &'a mut T> for LinkedList<T> {
 }
 
 impl<'a, T: 'a> SeqMut<'a, T> for LinkedList<T> {}
+impl<'a, T: 'a> Seq<'a, T> for LinkedList<T> {}

@@ -2,7 +2,7 @@ use core::borrow::Borrow;
 use core::hash::{Hash, BuildHasher};
 use std::collections::hash_map::{HashMap, Iter, IterMut};
 
-use super::*;
+use super::super::*;
 
 
 impl<K, V, S> Collection for HashMap<K, V, S>
@@ -25,26 +25,18 @@ impl<K, V, S> CollectionMut for HashMap<K, V, S>
     }
 }
 
-impl<K, V> Create for HashMap<K, V>
-    where K: Eq + Hash
-{
-    #[inline(always)]
-    fn create() -> Self {
-        HashMap::<K, V>::new()
-    }
-    #[inline(always)]
-    fn create_with_capacity(capacity: usize) -> Self {
-        HashMap::<K, V>::with_capacity(capacity)
-    }
-}
-
-impl<K, V, S> AddElementMut<(K, V)> for HashMap<K, V, S>
+impl<K, V> Create<(K, V)> for HashMap<K, V>
     where K: Eq + Hash,
-          S: BuildHasher
 {
+
+    #[inline(always)]
+    fn create() -> Self { HashMap::<K, V>::new() }
+    #[inline(always)]
+    fn create_with_capacity(_: usize) -> Self { HashMap::<K, V>::new() }
+
     #[inline(always)]
     fn add_element(&mut self, (key, value): (K, V)) {
-        HashMap::<K, V, S>::insert(self, key, value);
+        HashMap::<K, V>::insert(self, key, value);
     }
 }
 
@@ -123,6 +115,13 @@ impl<'a, K, V, S> IterableMut<'a, (&'a K, &'a mut V)> for HashMap<K, V, S>
 }
 
 impl<'a, K, Q: ?Sized, V, S> MapMut<'a, K, Q, V> for HashMap<K, V, S>
+    where K: 'a + Eq + Hash + Borrow<Q>,
+          Q: 'a + Eq + Hash,
+          V: 'a,
+          S: 'a + BuildHasher,
+{}
+
+impl<'a, K, Q: ?Sized, V, S> Map<'a, K, Q, V> for HashMap<K, V, S>
     where K: 'a + Eq + Hash + Borrow<Q>,
           Q: 'a + Eq + Hash,
           V: 'a,

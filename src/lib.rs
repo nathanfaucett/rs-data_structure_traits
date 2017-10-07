@@ -9,14 +9,7 @@
 extern crate alloc;
 
 
-#[cfg(feature = "use_std")] mod hash_map;
-#[cfg(feature = "use_std")] mod hash_set;
-
-
-mod add_element_mut;
-mod add_element;
-mod btree_map;
-mod btree_set;
+mod collections;
 mod collection_mut;
 mod collection;
 mod create;
@@ -28,7 +21,6 @@ mod insert_mut;
 mod insert;
 mod iterable_mut;
 mod iterable;
-mod linked_list;
 #[macro_use] mod macros;
 mod map_mut;
 mod map;
@@ -38,15 +30,12 @@ mod remove_mut;
 mod remove;
 mod seq_mut;
 mod seq;
-mod slice;
+mod set_mut;
+mod set;
 mod stack_mut;
 mod stack;
-mod string;
-mod vec;
 
 
-pub use self::add_element_mut::AddElementMut;
-pub use self::add_element::AddElement;
 pub use self::collection_mut::CollectionMut;
 pub use self::collection::Collection;
 pub use self::create::Create;
@@ -66,5 +55,7 @@ pub use self::remove_mut::RemoveMut;
 pub use self::remove::Remove;
 pub use self::seq_mut::SeqMut;
 pub use self::seq::Seq;
+pub use self::set_mut::SetMut;
+pub use self::set::Set;
 pub use self::stack_mut::StackMut;
 pub use self::stack::Stack;

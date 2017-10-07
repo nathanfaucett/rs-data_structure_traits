@@ -13,19 +13,19 @@ macro_rules! collection_count_args {
 macro_rules! collection {
     // collection![1, 2, 3]
     ($($x:expr),*) => ({
-        let mut _temp = $crate::Create::create_with_capacity(collection_count_args!($($x),*));
+        let mut temp = $crate::Create::create_with_capacity(collection_count_args!($($x),*));
 
-        $($crate::AddElementMut::add_element(&mut _temp, $x);)*
+        $($crate::Create::add_element(&mut temp, $x);)*
 
-        _temp
+        temp
     });
     // collection!{"I" => 1, "II" => 2}
     ($($k:expr => $v:expr),*) => ({
-        let mut _temp = $crate::Create::create_with_capacity(collection_count_args!($(($k, $v)),*));
+        let mut temp = $crate::Create::create_with_capacity(collection_count_args!($(($k, $v)),*));
 
-        $($crate::AddElementMut::add_element(&mut _temp, ($k, $v));)*
+        $($crate::Create::add_element(&mut temp, ($k, $v));)*
 
-        _temp
+        temp
     });
     ($($x:expr),+,) => {
         collection!($($x),+)

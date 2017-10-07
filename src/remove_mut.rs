@@ -1,8 +1,9 @@
-use super::collection_mut::CollectionMut;
 
 
-pub trait RemoveMut<K: ?Sized>: CollectionMut {
+pub trait RemoveMut<K>
+    where K: ?Sized,
+{
     type Output: ?Sized;
 
-    fn remove(&mut self, key: K) -> Self::Output;
+    fn remove(&mut self, K) -> Self::Output;
 }

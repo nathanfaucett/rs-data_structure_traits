@@ -2,7 +2,7 @@ use alloc::btree_map::{BTreeMap, Iter, IterMut};
 
 use core::borrow::Borrow;
 
-use super::*;
+use super::super::*;
 
 
 impl<K, V> Collection for BTreeMap<K, V>
@@ -23,22 +23,14 @@ impl<K, V> CollectionMut for BTreeMap<K, V>
     }
 }
 
-impl<K, V> Create for BTreeMap<K, V>
+impl<K, V> Create<(K, V)> for BTreeMap<K, V>
     where K: Eq + Ord,
 {
     #[inline(always)]
-    fn create() -> Self {
-        BTreeMap::<K, V>::new()
-    }
+    fn create() -> Self { BTreeMap::<K, V>::new() }
     #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self {
-        BTreeMap::<K, V>::new()
-    }
-}
+    fn create_with_capacity(_: usize) -> Self { BTreeMap::<K, V>::new() }
 
-impl<K, V> AddElementMut<(K, V)> for BTreeMap<K, V>
-    where K: Eq + Ord,
-{
     #[inline(always)]
     fn add_element(&mut self, (key, value): (K, V)) {
         BTreeMap::<K, V>::insert(self, key, value);
@@ -114,6 +106,12 @@ impl<'a, K, V> IterableMut<'a, (&'a K, &'a mut V)> for BTreeMap<K, V>
 }
 
 impl<'a, K, Q: ?Sized, V> MapMut<'a, K, Q, V> for BTreeMap<K, V>
+    where K: 'a + Eq + Ord + Borrow<Q>,
+          Q: 'a + Eq + Ord,
+          V: 'a,
+{}
+
+impl<'a, K, Q: ?Sized, V> Map<'a, K, Q, V> for BTreeMap<K, V>
     where K: 'a + Eq + Ord + Borrow<Q>,
           Q: 'a + Eq + Ord,
           V: 'a,

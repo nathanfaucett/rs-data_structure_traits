@@ -1,8 +1,10 @@
-use super::collection_mut::CollectionMut;
 
 
-pub trait InsertMut<K, V>: CollectionMut {
-    type Output;
+pub trait InsertMut<K, V>
+    where K: ?Sized,
+          V: ?Sized,
+{
+    type Output: ?Sized;
 
-    fn insert(&mut self, key: K, element: V) -> Self::Output;
+    fn insert(&mut self, K, V) -> Self::Output;
 }
