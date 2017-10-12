@@ -1,4 +1,4 @@
-use alloc::linked_list::{self, LinkedList};
+use alloc::linked_list::LinkedList;
 
 use super::super::*;
 
@@ -133,24 +133,3 @@ impl<T> GetMut<usize> for LinkedList<T> {
         LinkedList::<T>::iter_mut(self).nth(index)
     }
 }
-
-impl<'a, T: 'a> Iterable<'a, &'a T> for LinkedList<T> {
-    type Iter = linked_list::Iter<'a, T>;
-
-    #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        LinkedList::<T>::iter(self)
-    }
-}
-
-impl<'a, T: 'a> IterableMut<'a, &'a mut T> for LinkedList<T> {
-    type IterMut = linked_list::IterMut<'a, T>;
-
-    #[inline(always)]
-    fn iter_mut(&'a mut self) -> Self::IterMut {
-        LinkedList::<T>::iter_mut(self)
-    }
-}
-
-impl<'a, T: 'a> SeqMut<'a, T> for LinkedList<T> {}
-impl<'a, T: 'a> Seq<'a, T> for LinkedList<T> {}

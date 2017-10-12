@@ -1,4 +1,3 @@
-use core::slice;
 use core::slice::SliceExt;
 
 use super::super::*;
@@ -31,23 +30,5 @@ impl<T> GetMut<usize> for [T] {
         } else {
             None
         }
-    }
-}
-
-impl<'a, T: 'a> Iterable<'a, &'a T> for [T] {
-    type Iter = slice::Iter<'a, T>;
-
-    #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        self.iter()
-    }
-}
-
-impl<'a, T: 'a> IterableMut<'a, &'a mut T> for [T] {
-    type IterMut = slice::IterMut<'a, T>;
-
-    #[inline(always)]
-    fn iter_mut(&'a mut self) -> Self::IterMut {
-        self.iter_mut()
     }
 }

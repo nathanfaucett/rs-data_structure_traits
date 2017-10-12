@@ -1,4 +1,5 @@
-use alloc::btree_set::{BTreeSet, Iter};
+use alloc::btree_set::BTreeSet;
+
 use core::borrow::Borrow;
 
 use super::super::*;
@@ -37,23 +38,14 @@ impl<V> Create<V> for BTreeSet<V>
     }
 }
 
-impl<'a, V> Iterable<'a, &'a V> for BTreeSet<V>
-    where V: 'a + Eq + Ord,
+impl<'a, Q, V> Get<&'a Q> for BTreeSet<V>
+    where Q: Eq + Ord + ?Sized,
+          V: Eq + Ord + Borrow<Q>,
 {
-    type Iter = Iter<'a, V>;
+    type Output = V;
 
     #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        BTreeSet::<V>::iter(self)
-    }
-}
-
-impl<'a, V, Q: ?Sized> Set<'a, V, Q> for BTreeSet<V>
-    where V: 'a + Eq + Ord + Borrow<Q>,
-          Q: 'a + Eq + Ord,
-{
-    #[inline(always)]
-    fn contains(&self, v: &Q) -> bool {
-        BTreeSet::contains(self, v)
+    fn get(&self, q: &Q) -> Option<&Self::Output> {
+        BTreeSet::get(self, q)
     }
 }

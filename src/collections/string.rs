@@ -1,6 +1,6 @@
 use alloc::string::String;
 
-use core::str::{self, Chars};
+use core::str;
 
 use super::super::*;
 
@@ -10,15 +10,6 @@ impl<'a> Collection for &'a str {
     #[inline(always)]
     fn len(&self) -> usize {
         str::len(self)
-    }
-}
-
-impl<'a> Iterable<'a, char> for &'a str {
-    type Iter = Chars<'a>;
-
-    #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        (&**self).chars()
     }
 }
 
@@ -67,14 +58,5 @@ impl RemoveMut<usize> for String {
     #[inline(always)]
     fn remove(&mut self, index: usize) -> Self::Output {
         String::remove(self, index)
-    }
-}
-
-impl<'a> Iterable<'a, char> for String {
-    type Iter = Chars<'a>;
-
-    #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        (&**self).chars()
     }
 }

@@ -1,7 +1,7 @@
-use core::borrow::Borrow;
 use core::hash::{Hash, BuildHasher};
+use core::borrow::Borrow;
 
-use std::collections::hash_set::{HashSet, Iter};
+use std::collections::hash_set::HashSet;
 
 use super::super::*;
 
@@ -41,23 +41,14 @@ impl<V> Create<V> for HashSet<V>
     }
 }
 
-impl<'a, V> Iterable<'a, &'a V> for HashSet<V>
-    where V: 'a + Eq + Hash,
+impl<'a, Q, V> Get<&'a Q> for HashSet<V>
+    where Q: Eq + Hash + ?Sized,
+          V: Eq + Hash + Borrow<Q>,
 {
-    type Iter = Iter<'a, V>;
+    type Output = V;
 
     #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        HashSet::<V>::iter(self)
-    }
-}
-
-impl<'a, V, Q: ?Sized> Set<'a, V, Q> for HashSet<V>
-    where V: 'a + Eq + Hash + Borrow<Q>,
-          Q: 'a + Eq + Hash,
-{
-    #[inline(always)]
-    fn contains(&self, v: &Q) -> bool {
-        HashSet::contains(self, v)
+    fn get(&self, q: &Q) -> Option<&Self::Output> {
+        HashSet::get(self, q)
     }
 }

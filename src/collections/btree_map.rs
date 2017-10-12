@@ -1,4 +1,4 @@
-use alloc::btree_map::{BTreeMap, Iter, IterMut};
+use alloc::btree_map::BTreeMap;
 
 use core::borrow::Borrow;
 
@@ -55,8 +55,8 @@ impl<'a, K, Q: ?Sized, V> RemoveMut<&'a Q> for BTreeMap<K, V>
     type Output = Option<V>;
 
     #[inline]
-    fn remove(&mut self, k: &Q) -> Self::Output {
-        BTreeMap::<K, V>::remove(self, k)
+    fn remove(&mut self, q: &Q) -> Self::Output {
+        BTreeMap::<K, V>::remove(self, q)
     }
 }
 
@@ -67,8 +67,8 @@ impl<'a, K, Q: ?Sized, V> Get<&'a Q> for BTreeMap<K, V>
     type Output = V;
 
     #[inline(always)]
-    fn get(&self, k: &Q) -> Option<&Self::Output> {
-        BTreeMap::get(self, k)
+    fn get(&self, q: &Q) -> Option<&Self::Output> {
+        BTreeMap::<K, V>::get(self, q)
     }
 }
 impl<'a, K, Q: ?Sized, V> GetMut<&'a Q> for BTreeMap<K, V>
@@ -76,48 +76,7 @@ impl<'a, K, Q: ?Sized, V> GetMut<&'a Q> for BTreeMap<K, V>
           Q: Eq + Ord,
 {
     #[inline(always)]
-    fn get_mut(&mut self, k: &Q) -> Option<&mut Self::Output> {
-        BTreeMap::get_mut(self, k)
-    }
-}
-
-impl<'a, K, V> Iterable<'a, (&'a K, &'a V)> for BTreeMap<K, V>
-    where K: 'a + Eq + Ord,
-          V: 'a,
-{
-    type Iter = Iter<'a, K, V>;
-
-    #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        BTreeMap::<K, V>::iter(self)
-    }
-}
-
-impl<'a, K, V> IterableMut<'a, (&'a K, &'a mut V)> for BTreeMap<K, V>
-    where K: 'a + Eq + Ord,
-          V: 'a,
-{
-    type IterMut = IterMut<'a, K, V>;
-
-    #[inline(always)]
-    fn iter_mut(&'a mut self) -> Self::IterMut {
-        BTreeMap::<K, V>::iter_mut(self)
-    }
-}
-
-impl<'a, K, Q: ?Sized, V> MapMut<'a, K, Q, V> for BTreeMap<K, V>
-    where K: 'a + Eq + Ord + Borrow<Q>,
-          Q: 'a + Eq + Ord,
-          V: 'a,
-{}
-
-impl<'a, K, Q: ?Sized, V> Map<'a, K, Q, V> for BTreeMap<K, V>
-    where K: 'a + Eq + Ord + Borrow<Q>,
-          Q: 'a + Eq + Ord,
-          V: 'a,
-{
-    #[inline(always)]
-    fn contains_key(&self, k: &Q) -> bool {
-        BTreeMap::contains_key(self, k)
+    fn get_mut(&mut self, q: &Q) -> Option<&mut Self::Output> {
+        BTreeMap::<K, V>::get_mut(self, q)
     }
 }

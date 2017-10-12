@@ -1,7 +1,5 @@
 use alloc::vec::Vec;
 
-use core::slice;
-
 use super::super::*;
 
 
@@ -136,24 +134,3 @@ impl<T> GetMut<usize> for Vec<T> {
         }
     }
 }
-
-impl<'a, T: 'a> Iterable<'a, &'a T> for Vec<T> {
-    type Iter = slice::Iter<'a, T>;
-
-    #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        (&**self).iter()
-    }
-}
-
-impl<'a, T: 'a> IterableMut<'a, &'a mut T> for Vec<T> {
-    type IterMut = slice::IterMut<'a, T>;
-
-    #[inline(always)]
-    fn iter_mut(&'a mut self) -> Self::IterMut {
-        (&mut **self).iter_mut()
-    }
-}
-
-impl<'a, T: 'a> SeqMut<'a, T> for Vec<T> {}
-impl<'a, T: 'a> Seq<'a, T> for Vec<T> {}

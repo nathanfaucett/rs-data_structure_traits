@@ -1,6 +1,6 @@
 use core::borrow::Borrow;
 use core::hash::{Hash, BuildHasher};
-use std::collections::hash_map::{HashMap, Iter, IterMut};
+use std::collections::hash_map::HashMap;
 
 use super::super::*;
 
@@ -60,8 +60,8 @@ impl<'a, K, Q: ?Sized, V, S> RemoveMut<&'a Q> for HashMap<K, V, S>
     type Output = Option<V>;
 
     #[inline]
-    fn remove(&mut self, k: &Q) -> Self::Output {
-        HashMap::<K, V, S>::remove(self, k)
+    fn remove(&mut self, q: &Q) -> Self::Output {
+        HashMap::<K, V, S>::remove(self, q)
     }
 }
 
@@ -73,8 +73,8 @@ impl<'a, K, Q: ?Sized, V, S> Get<&'a Q> for HashMap<K, V, S>
     type Output = V;
 
     #[inline(always)]
-    fn get(&self, k: &Q) -> Option<&Self::Output> {
-        HashMap::get(self, k)
+    fn get(&self, q: &Q) -> Option<&Self::Output> {
+        HashMap::<K, V, S>::get(self, q)
     }
 }
 impl<'a, K, Q: ?Sized, V, S> GetMut<&'a Q> for HashMap<K, V, S>
@@ -83,52 +83,7 @@ impl<'a, K, Q: ?Sized, V, S> GetMut<&'a Q> for HashMap<K, V, S>
           S: BuildHasher,
 {
     #[inline(always)]
-    fn get_mut(&mut self, k: &Q) -> Option<&mut Self::Output> {
-        HashMap::get_mut(self, k)
-    }
-}
-
-impl<'a, K, V, S> Iterable<'a, (&'a K, &'a V)> for HashMap<K, V, S>
-    where K: 'a + Eq + Hash,
-          V: 'a,
-          S: 'a + BuildHasher,
-{
-    type Iter = Iter<'a, K, V>;
-
-    #[inline(always)]
-    fn iter(&'a self) -> Self::Iter {
-        HashMap::<K, V, S>::iter(self)
-    }
-}
-
-impl<'a, K, V, S> IterableMut<'a, (&'a K, &'a mut V)> for HashMap<K, V, S>
-    where K: 'a + Eq + Hash,
-          V: 'a,
-          S: 'a + BuildHasher,
-{
-    type IterMut = IterMut<'a, K, V>;
-
-    #[inline(always)]
-    fn iter_mut(&'a mut self) -> Self::IterMut {
-        HashMap::<K, V, S>::iter_mut(self)
-    }
-}
-
-impl<'a, K, Q: ?Sized, V, S> MapMut<'a, K, Q, V> for HashMap<K, V, S>
-    where K: 'a + Eq + Hash + Borrow<Q>,
-          Q: 'a + Eq + Hash,
-          V: 'a,
-          S: 'a + BuildHasher,
-{}
-
-impl<'a, K, Q: ?Sized, V, S> Map<'a, K, Q, V> for HashMap<K, V, S>
-    where K: 'a + Eq + Hash + Borrow<Q>,
-          Q: 'a + Eq + Hash,
-          V: 'a,
-          S: 'a + BuildHasher,
-{
-    #[inline(always)]
-    fn contains_key(&self, k: &Q) -> bool {
-        HashMap::contains_key(self, k)
+    fn get_mut(&mut self, q: &Q) -> Option<&mut Self::Output> {
+        HashMap::<K, V, S>::get_mut(self, q)
     }
 }
