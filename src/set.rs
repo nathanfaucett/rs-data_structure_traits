@@ -6,7 +6,7 @@ use super::get::Get;
 
 pub trait Set<'a, V, Q>:
     Collection +
-    Get<&'a Q, Output = V>
+    Get<&'a Q, Output = V> +
 
     where &'a Self: 'a + IntoIterator<Item = &'a V>,
           V: 'a + ?Sized + Borrow<Q>,

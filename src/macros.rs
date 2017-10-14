@@ -15,7 +15,7 @@ macro_rules! collection {
     ($($x:expr),*) => ({
         let mut temp = $crate::Create::create_with_capacity(collection_count_args!($($x),*));
 
-        $($crate::Create::add_element(&mut temp, $x);)*
+        $(temp = $crate::Create::add_element(temp, $x);)*
 
         temp
     });
@@ -23,7 +23,7 @@ macro_rules! collection {
     ($($k:expr => $v:expr),*) => ({
         let mut temp = $crate::Create::create_with_capacity(collection_count_args!($(($k, $v)),*));
 
-        $($crate::Create::add_element(&mut temp, ($k, $v));)*
+        $(temp = $crate::Create::add_element(temp, ($k, $v));)*
 
         temp
     });

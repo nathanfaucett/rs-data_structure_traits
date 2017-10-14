@@ -38,8 +38,9 @@ impl Create<char> for String {
     fn create_with_capacity(capacity: usize) -> Self { String::with_capacity(capacity) }
 
     #[inline(always)]
-    fn add_element(&mut self, ch: char) {
-        String::push(self, ch);
+    fn add_element(mut self, ch: char) -> Self {
+        String::push(&mut self, ch);
+        self
     }
 }
 

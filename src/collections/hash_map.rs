@@ -35,8 +35,9 @@ impl<K, V> Create<(K, V)> for HashMap<K, V>
     fn create_with_capacity(_: usize) -> Self { HashMap::<K, V>::new() }
 
     #[inline(always)]
-    fn add_element(&mut self, (key, value): (K, V)) {
-        HashMap::<K, V>::insert(self, key, value);
+    fn add_element(mut self, (key, value): (K, V)) -> Self {
+        HashMap::<K, V>::insert(&mut self, key, value);
+        self
     }
 }
 

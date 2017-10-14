@@ -33,8 +33,9 @@ impl<V> Create<V> for BTreeSet<V>
     fn create_with_capacity(_: usize) -> Self { BTreeSet::<V>::new() }
 
     #[inline(always)]
-    fn add_element(&mut self, value: V) {
-        BTreeSet::<V>::insert(self, value);
+    fn add_element(mut self, value: V) -> Self {
+        BTreeSet::<V>::insert(&mut self, value);
+        self
     }
 }
 

@@ -22,8 +22,9 @@ impl<T> Create<T> for LinkedList<T> {
     fn create_with_capacity(_: usize) -> Self { LinkedList::<T>::new() }
 
     #[inline(always)]
-    fn add_element(&mut self, value: T) {
-        LinkedList::<T>::push(self, value);
+    fn add_element(mut self, value: T) -> Self {
+        LinkedList::<T>::push(&mut self, value);
+        self
     }
 }
 

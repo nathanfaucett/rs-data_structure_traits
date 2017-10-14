@@ -8,7 +8,7 @@ use super::map::Map;
 pub trait MapMut<'a, K, Q, V>:
     Map<'a, K, Q, V> +
     CollectionMut +
-    GetMut<&'a Q, Output = V>
+    GetMut<&'a Q, Output = V> +
 
     where &'a Self: 'a + IntoIterator<Item = (&'a K, &'a V)>,
           &'a mut Self: 'a + IntoIterator<Item = (&'a K, &'a mut V)>,

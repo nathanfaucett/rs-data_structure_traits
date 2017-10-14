@@ -36,8 +36,9 @@ impl<V> Create<V> for HashSet<V>
     fn create_with_capacity(_: usize) -> Self { HashSet::<V>::new() }
 
     #[inline(always)]
-    fn add_element(&mut self, value: V) {
-        HashSet::<V>::insert(self, value);
+    fn add_element(mut self, value: V) -> Self {
+        HashSet::<V>::insert(&mut self, value);
+        self
     }
 }
 

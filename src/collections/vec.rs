@@ -25,8 +25,9 @@ impl<T> Create<T> for Vec<T> {
     fn create_with_capacity(capacity: usize) -> Self { Vec::<T>::with_capacity(capacity) }
 
     #[inline(always)]
-    fn add_element(&mut self, value: T) {
-        Vec::<T>::push(self, value);
+    fn add_element(mut self, value: T) -> Self {
+        Vec::<T>::push(&mut self, value);
+        self
     }
 }
 

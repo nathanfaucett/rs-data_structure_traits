@@ -32,8 +32,9 @@ impl<K, V> Create<(K, V)> for BTreeMap<K, V>
     fn create_with_capacity(_: usize) -> Self { BTreeMap::<K, V>::new() }
 
     #[inline(always)]
-    fn add_element(&mut self, (key, value): (K, V)) {
-        BTreeMap::<K, V>::insert(self, key, value);
+    fn add_element(mut self, (key, value): (K, V)) -> Self {
+        BTreeMap::<K, V>::insert(&mut self, key, value);
+        self
     }
 }
 
