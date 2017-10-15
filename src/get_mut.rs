@@ -1,4 +1,4 @@
-use super::get::Get;
+use super::Get;
 
 
 pub trait GetMut<K>: Get<K>

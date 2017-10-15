@@ -1,7 +1,6 @@
 use core::borrow::Borrow;
 
-use super::collection::Collection;
-use super::get::Get;
+use super::{Collection, Get};
 
 
 pub trait Map<'a, K, Q, V>:

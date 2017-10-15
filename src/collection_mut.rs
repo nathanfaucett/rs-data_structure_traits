@@ -1,4 +1,4 @@
-use super::collection::Collection;
+use super::Collection;
 
 
 pub trait CollectionMut: Collection {

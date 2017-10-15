@@ -4,5 +4,7 @@ pub trait Insert<K, V>
     where K: ?Sized,
           V: ?Sized,
 {
-    fn insert(&self, K, V) -> Self;
+    type Output: ?Sized;
+
+    fn insert(&mut self, K, V) -> Self::Output;
 }

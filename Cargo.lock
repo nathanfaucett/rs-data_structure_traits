@@ -1,14 +1,4 @@
 [root]
 name = "data_structure_traits"
-version = "0.1.4"
-dependencies = [
- "lazy_static 0.2.9 (registry+https://github.com/rust-lang/crates.io-index)",
-]
+version = "0.1.5"
 
-[[package]]
-name = "lazy_static"
-version = "0.2.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[metadata]
-"checksum lazy_static 0.2.9 (registry+https://github.com/rust-lang/crates.io-index)" = "c9e5e58fa1a4c3b915a561a78a22ee0cac6ab97dca2504428bc1cb074375f8d5"

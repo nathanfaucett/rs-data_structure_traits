@@ -1,5 +1,4 @@
-use super::collection::Collection;
-use super::get::Get;
+use super::{Collection, Get};
 
 
 pub trait Seq<'a, V: 'a>:

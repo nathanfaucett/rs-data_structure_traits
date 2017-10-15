@@ -28,7 +28,7 @@ impl<T> Create<T> for LinkedList<T> {
     }
 }
 
-impl<T> DequeMut<T> for LinkedList<T> {
+impl<T> Deque<T> for LinkedList<T> {
     #[inline(always)]
     fn push_front(&mut self, element: T) {
         LinkedList::<T>::push_front(self, element)
@@ -63,7 +63,7 @@ impl<T> DequeMut<T> for LinkedList<T> {
     }
 }
 
-impl<T> StackMut<T> for LinkedList<T> {
+impl<T> Stack<T> for LinkedList<T> {
     #[inline(always)]
     fn push(&mut self, element: T) { LinkedList::<T>::push_back(self, element) }
     #[inline(always)]
@@ -74,7 +74,7 @@ impl<T> StackMut<T> for LinkedList<T> {
     fn top_mut(&mut self) -> Option<&mut T> { LinkedList::<T>::back_mut(self) }
 }
 
-impl<T> QueueMut<T> for LinkedList<T> {
+impl<T> Queue<T> for LinkedList<T> {
     #[inline(always)]
     fn enqueue(&mut self, element: T) { LinkedList::<T>::push_back(self, element) }
     #[inline(always)]
@@ -85,7 +85,7 @@ impl<T> QueueMut<T> for LinkedList<T> {
     fn peek_mut(&mut self) -> Option<&mut T> { LinkedList::<T>::front_mut(self) }
 }
 
-impl<T> InsertMut<usize, T> for LinkedList<T> {
+impl<T> Insert<usize, T> for LinkedList<T> {
     type Output = ();
 
     #[inline]
@@ -102,7 +102,7 @@ impl<T> InsertMut<usize, T> for LinkedList<T> {
     }
 }
 
-impl<T> RemoveMut<usize> for LinkedList<T> {
+impl<T> Remove<usize> for LinkedList<T> {
     type Output = T;
 
     #[inline]

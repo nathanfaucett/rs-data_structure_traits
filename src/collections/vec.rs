@@ -31,7 +31,7 @@ impl<T> Create<T> for Vec<T> {
     }
 }
 
-impl<T> DequeMut<T> for Vec<T> {
+impl<T> Deque<T> for Vec<T> {
     #[inline(always)]
     fn push_front(&mut self, element: T) {
         Vec::<T>::insert(self, 0, element)
@@ -73,7 +73,7 @@ impl<T> DequeMut<T> for Vec<T> {
     }
 }
 
-impl<T> InsertMut<usize, T> for Vec<T> {
+impl<T> Insert<usize, T> for Vec<T> {
     type Output = ();
 
     #[inline(always)]
@@ -82,7 +82,7 @@ impl<T> InsertMut<usize, T> for Vec<T> {
     }
 }
 
-impl<T> RemoveMut<usize> for Vec<T> {
+impl<T> Remove<usize> for Vec<T> {
     type Output = T;
 
     #[inline(always)]
@@ -91,7 +91,7 @@ impl<T> RemoveMut<usize> for Vec<T> {
     }
 }
 
-impl<T> StackMut<T> for Vec<T> {
+impl<T> Stack<T> for Vec<T> {
     #[inline(always)]
     fn push(&mut self, element: T) { Vec::<T>::push_front(self, element) }
     #[inline(always)]
@@ -102,7 +102,7 @@ impl<T> StackMut<T> for Vec<T> {
     fn top_mut(&mut self) -> Option<&mut T> { Vec::<T>::front_mut(self) }
 }
 
-impl<T> QueueMut<T> for Vec<T> {
+impl<T> Queue<T> for Vec<T> {
     #[inline(always)]
     fn enqueue(&mut self, element: T) { Vec::<T>::push_back(self, element) }
     #[inline(always)]
