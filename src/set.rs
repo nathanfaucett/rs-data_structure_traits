@@ -11,7 +11,10 @@ pub trait Set<'a, V, Q>:
           V: 'a + ?Sized + Borrow<Q>,
           Q: 'a + ?Sized,
 {
-    fn contains(&self, &'a Q) -> bool;
+    #[inline(always)]
+    fn contains(&self, q: &'a Q) -> bool {
+        self.get(q).is_some()
+    }
 }
 
 
@@ -20,8 +23,4 @@ impl<'a, V, Q, T> Set<'a, V, Q> for T
           &'a T: 'a + IntoIterator<Item = &'a V>,
           V: 'a + ?Sized + Borrow<Q>,
           Q: 'a + ?Sized,
-{
-    fn contains(&self, q: &'a Q) -> bool {
-        self.get(q).is_some()
-    }
-}
+{}

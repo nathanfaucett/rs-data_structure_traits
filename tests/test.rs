@@ -13,9 +13,8 @@ fn get<C, I, T>(collection: &C, index: I) -> Option<&T>
 }
 
 fn count_len<'a, S, T>(seq: &'a S) -> usize
-    where S: SeqMut<'a, T>,
+    where S: Seq<'a, T>,
           &'a S: IntoIterator<Item = &'a T>,
-          &'a mut S: IntoIterator<Item = &'a mut T>,
           T: 'a,
 {
     let mut count = 0;

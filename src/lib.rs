@@ -1,6 +1,5 @@
 #![feature(alloc)]
 #![feature(core_slice_ext)]
-#![feature(custom_attribute)]
 #![no_std]
 
 

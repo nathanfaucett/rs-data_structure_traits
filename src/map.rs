@@ -12,7 +12,10 @@ pub trait Map<'a, K, Q, V>:
           Q: 'a + ?Sized,
           V: 'a + ?Sized,
 {
-    fn contains_key(&self, &'a Q) -> bool;
+    #[inline(always)]
+    fn contains_key(&self, q: &'a Q) -> bool {
+        self.get(q).is_some()
+    }
 }
 
 
@@ -22,9 +25,4 @@ impl<'a, K, Q, V, T> Map<'a, K, Q, V> for T
           K: 'a + ?Sized + Borrow<Q>,
           Q: 'a + ?Sized,
           V: 'a + ?Sized,
-{
-    #[inline(always)]
-    fn contains_key(&self, q: &'a Q) -> bool {
-        self.get(q).is_some()
-    }
-}
+{}
