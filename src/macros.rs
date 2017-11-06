@@ -9,6 +9,24 @@ macro_rules! collection_count_args {
     ($head:expr, $($tail:expr),+) => { 1 + collection_count_args!($($tail),+) };
 }
 
+/// Anything that implements the `Create` trait can be used with this
+/// # Examples
+/// ```
+/// #[macro_use] extern crate data_structure_traits;
+///
+/// use std::collections::HashMap;
+///
+/// fn main() {
+///     // HashMap
+///     let map: HashMap<String, usize> = collection!{
+///         "a".into() => 1,
+///         "b".into() => 2,
+///         "c".into() => 3,
+///     };
+///     // Vec
+///     let vec: Vec<usize> = collection![0, 1, 2, 3];
+/// }
+/// ```
 #[macro_export]
 macro_rules! collection {
     // collection![1, 2, 3]

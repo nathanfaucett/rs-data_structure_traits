@@ -1,6 +1,6 @@
 [package]
 name = "data_structure_traits"
-version = "0.1.6"
+version = "0.1.7"
 authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
 
 keywords = ["data", "structure", "collection", "collections", "traits"]
