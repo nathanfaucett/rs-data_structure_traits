@@ -1,14 +1,15 @@
 use core::hash::{Hash, BuildHasher};
 use core::borrow::Borrow;
 
-use std::collections::hash_set::HashSet;
+#[cfg(feature = "use_std")] use std::collections::hash_set::HashSet;
+#[cfg(not(feature = "use_std"))] use hashmap_core::HashSet;
 
 use super::super::*;
 
 
 impl<V, S> Collection for HashSet<V, S>
     where V: Eq + Hash,
-          S: BuildHasher
+          S: BuildHasher,
 {
     #[inline(always)]
     fn len(&self) -> usize {
@@ -18,7 +19,7 @@ impl<V, S> Collection for HashSet<V, S>
 
 impl<V, S> CollectionMut for HashSet<V, S>
     where V: Eq + Hash,
-          S: BuildHasher
+          S: BuildHasher,
 {
     #[inline(always)]
     fn clear(&mut self) {
@@ -26,18 +27,19 @@ impl<V, S> CollectionMut for HashSet<V, S>
     }
 }
 
-impl<V> Create<V> for HashSet<V>
+impl<V, S> Create<V> for HashSet<V, S>
     where V: Eq + Hash,
+          S: Default + BuildHasher,
 {
 
     #[inline(always)]
-    fn create() -> Self { HashSet::<V>::new() }
+    fn create() -> Self { HashSet::<V, S>::default() }
     #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self { HashSet::<V>::new() }
+    fn create_with_capacity(_: usize) -> Self { HashSet::<V, S>::default() }
 
     #[inline(always)]
     fn add_element(mut self, value: V) -> Self {
-        HashSet::<V>::insert(&mut self, value);
+        HashSet::<V, S>::insert(&mut self, value);
         self
     }
 }

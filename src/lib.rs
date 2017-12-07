@@ -4,6 +4,7 @@
 
 
 #[cfg(feature = "use_std")] extern crate std;
+#[cfg(not(feature = "use_std"))] extern crate hashmap_core;
 
 extern crate alloc;
 

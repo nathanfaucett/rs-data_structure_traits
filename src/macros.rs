@@ -13,8 +13,10 @@ macro_rules! collection_count_args {
 /// # Examples
 /// ```
 /// #[macro_use] extern crate data_structure_traits;
+/// #[cfg(not(feature = "use_std"))] extern crate hashmap_core;
 ///
-/// use std::collections::HashMap;
+/// #[cfg(feature = "use_std")] use std::collections::{HashMap, HashSet};
+/// #[cfg(not(feature = "use_std"))] use hashmap_core::{FnvHashMap as HashMap, FnvHashSet as HashSet};
 ///
 /// fn main() {
 ///     // HashMap

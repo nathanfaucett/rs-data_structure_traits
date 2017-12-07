@@ -10,7 +10,6 @@ data structure collection traits
 use data_structure_traits::*;
 
 
-
 fn use_seq<'a, S>(s: &'a mut S) -> usize
     where S: SeqMut<'a, usize>,
           &'a S: IntoIterator<Item = &'a usize>,

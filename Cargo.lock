@@ -1,4 +1,14 @@
 [[package]]
 name = "data_structure_traits"
-version = "0.1.6"
+version = "0.1.8"
+dependencies = [
+ "hashmap_core 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
+[[package]]
+name = "hashmap_core"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum hashmap_core 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "e1d87f2a3739d904668679f47e6ef3009c8b1a26cc90eb2191ee3b0bd1fa90f2"

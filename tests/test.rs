@@ -1,7 +1,13 @@
 #[macro_use] extern crate data_structure_traits;
 
 
-use std::collections::{BTreeMap, HashMap, BTreeSet, HashSet};
+#[cfg(not(feature = "use_std"))] extern crate hashmap_core;
+
+
+use std::collections::{BTreeMap, BTreeSet};
+
+#[cfg(feature = "use_std")] use std::collections::{HashMap, HashSet};
+#[cfg(not(feature = "use_std"))] use hashmap_core::{FnvHashMap as HashMap, FnvHashSet as HashSet};
 
 use data_structure_traits::*;
 

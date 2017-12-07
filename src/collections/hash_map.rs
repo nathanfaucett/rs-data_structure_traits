@@ -1,13 +1,15 @@
 use core::borrow::Borrow;
 use core::hash::{Hash, BuildHasher};
-use std::collections::hash_map::HashMap;
+
+#[cfg(feature = "use_std")] use std::collections::hash_map::HashMap;
+#[cfg(not(feature = "use_std"))] use hashmap_core::HashMap;
 
 use super::super::*;
 
 
 impl<K, V, S> Collection for HashMap<K, V, S>
     where K: Eq + Hash,
-          S: BuildHasher
+          S: BuildHasher,
 {
     #[inline(always)]
     fn len(&self) -> usize {
@@ -17,7 +19,7 @@ impl<K, V, S> Collection for HashMap<K, V, S>
 
 impl<K, V, S> CollectionMut for HashMap<K, V, S>
     where K: Eq + Hash,
-          S: BuildHasher
+          S: BuildHasher,
 {
     #[inline(always)]
     fn clear(&mut self) {
@@ -25,18 +27,19 @@ impl<K, V, S> CollectionMut for HashMap<K, V, S>
     }
 }
 
-impl<K, V> Create<(K, V)> for HashMap<K, V>
+impl<K, V, S> Create<(K, V)> for HashMap<K, V, S>
     where K: Eq + Hash,
+          S: Default + BuildHasher,
 {
 
     #[inline(always)]
-    fn create() -> Self { HashMap::<K, V>::new() }
+    fn create() -> Self { HashMap::<K, V, S>::default() }
     #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self { HashMap::<K, V>::new() }
+    fn create_with_capacity(_: usize) -> Self { HashMap::<K, V, S>::default() }
 
     #[inline(always)]
     fn add_element(mut self, (key, value): (K, V)) -> Self {
-        HashMap::<K, V>::insert(&mut self, key, value);
+        HashMap::<K, V, S>::insert(&mut self, key, value);
         self
     }
 }

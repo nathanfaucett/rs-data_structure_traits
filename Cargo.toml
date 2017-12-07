@@ -1,16 +1,18 @@
 [package]
 name = "data_structure_traits"
-version = "0.1.7"
-authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
-
-keywords = ["data", "structure", "collection", "collections", "traits"]
 description = "data structure collection traits"
+version = "0.1.8"
+authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
+keywords = ["data", "structure", "collection", "collections", "traits", "no_std"]
+categories = ["data-structures"]
 license = "MIT"
 readme = "README.md"
 repository = "https://gitlab.com/nathanfaucett/rs-data_structure_traits.git"
 homepage = "https://gitlab.com/nathanfaucett/rs-data_structure_traits"
 
 [dependencies]
+hashmap_core = { version = "0.1" }
+
 [dev-dependencies]
 
 [features]
