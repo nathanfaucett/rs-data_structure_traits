@@ -1,27 +1,30 @@
-#[macro_use] extern crate data_structure_traits;
+#[macro_use]
+extern crate data_structure_traits;
 
-
-#[cfg(not(feature = "use_std"))] extern crate hashmap_core;
-
+#[cfg(not(feature = "use_std"))]
+extern crate hashmap_core;
 
 use std::collections::{BTreeMap, BTreeSet};
 
-#[cfg(feature = "use_std")] use std::collections::{HashMap, HashSet};
-#[cfg(not(feature = "use_std"))] use hashmap_core::{FnvHashMap as HashMap, FnvHashSet as HashSet};
+#[cfg(not(feature = "use_std"))]
+use hashmap_core::{FnvHashMap as HashMap, FnvHashSet as HashSet};
+#[cfg(feature = "use_std")]
+use std::collections::{HashMap, HashSet};
 
 use data_structure_traits::*;
 
-
 fn get<C, I, T>(collection: &C, index: I) -> Option<&T>
-    where C: Get<I, Output = T>,
+where
+    C: Get<I, Output = T>,
 {
     collection.get(index)
 }
 
 fn count_len<'a, S, T>(seq: &'a S) -> usize
-    where S: Seq<'a, T>,
-          &'a S: IntoIterator<Item = &'a T>,
-          T: 'a,
+where
+    S: Seq<'a, T>,
+    &'a S: IntoIterator<Item = &'a T>,
+    T: 'a,
 {
     let mut count = 0;
     for _ in seq {
@@ -29,7 +32,6 @@ fn count_len<'a, S, T>(seq: &'a S) -> usize
     }
     count
 }
-
 
 #[test]
 fn test_get() {
