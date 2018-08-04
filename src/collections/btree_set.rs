@@ -1,12 +1,12 @@
-use alloc::btree_set::BTreeSet;
+use alloc::collections::BTreeSet;
 
 use core::borrow::Borrow;
 
 use super::super::*;
 
-
 impl<V> Collection for BTreeSet<V>
-    where V: Eq + Ord,
+where
+    V: Eq + Ord,
 {
     #[inline(always)]
     fn len(&self) -> usize {
@@ -15,7 +15,8 @@ impl<V> Collection for BTreeSet<V>
 }
 
 impl<V> CollectionMut for BTreeSet<V>
-    where V: Eq + Ord,
+where
+    V: Eq + Ord,
 {
     #[inline(always)]
     fn clear(&mut self) {
@@ -24,13 +25,17 @@ impl<V> CollectionMut for BTreeSet<V>
 }
 
 impl<V> Create<V> for BTreeSet<V>
-    where V: Eq + Ord,
+where
+    V: Eq + Ord,
 {
-
     #[inline(always)]
-    fn create() -> Self { BTreeSet::<V>::new() }
+    fn create() -> Self {
+        BTreeSet::<V>::new()
+    }
     #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self { BTreeSet::<V>::new() }
+    fn create_with_capacity(_: usize) -> Self {
+        BTreeSet::<V>::new()
+    }
 
     #[inline(always)]
     fn add_element(mut self, value: V) -> Self {
@@ -40,8 +45,9 @@ impl<V> Create<V> for BTreeSet<V>
 }
 
 impl<'a, Q, V> Get<&'a Q> for BTreeSet<V>
-    where Q: Eq + Ord + ?Sized,
-          V: Eq + Ord + Borrow<Q>,
+where
+    Q: Eq + Ord + ?Sized,
+    V: Eq + Ord + Borrow<Q>,
 {
     type Output = V;
 

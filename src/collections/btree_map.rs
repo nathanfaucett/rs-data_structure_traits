@@ -1,12 +1,12 @@
-use alloc::btree_map::BTreeMap;
+use alloc::collections::BTreeMap;
 
 use core::borrow::Borrow;
 
 use super::super::*;
 
-
 impl<K, V> Collection for BTreeMap<K, V>
-    where K: Eq + Ord,
+where
+    K: Eq + Ord,
 {
     #[inline(always)]
     fn len(&self) -> usize {
@@ -15,7 +15,8 @@ impl<K, V> Collection for BTreeMap<K, V>
 }
 
 impl<K, V> CollectionMut for BTreeMap<K, V>
-    where K: Eq + Ord,
+where
+    K: Eq + Ord,
 {
     #[inline(always)]
     fn clear(&mut self) {
@@ -24,12 +25,17 @@ impl<K, V> CollectionMut for BTreeMap<K, V>
 }
 
 impl<K, V> Create<(K, V)> for BTreeMap<K, V>
-    where K: Eq + Ord,
+where
+    K: Eq + Ord,
 {
     #[inline(always)]
-    fn create() -> Self { BTreeMap::<K, V>::new() }
+    fn create() -> Self {
+        BTreeMap::<K, V>::new()
+    }
     #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self { BTreeMap::<K, V>::new() }
+    fn create_with_capacity(_: usize) -> Self {
+        BTreeMap::<K, V>::new()
+    }
 
     #[inline(always)]
     fn add_element(mut self, (key, value): (K, V)) -> Self {
@@ -39,7 +45,8 @@ impl<K, V> Create<(K, V)> for BTreeMap<K, V>
 }
 
 impl<'a, K, V> Insert<K, V> for BTreeMap<K, V>
-    where K: Eq + Ord,
+where
+    K: Eq + Ord,
 {
     type Output = Option<V>;
 
@@ -50,8 +57,9 @@ impl<'a, K, V> Insert<K, V> for BTreeMap<K, V>
 }
 
 impl<'a, K, Q: ?Sized, V> Remove<&'a Q> for BTreeMap<K, V>
-    where K: Eq + Ord + Borrow<Q>,
-          Q: Eq + Ord,
+where
+    K: Eq + Ord + Borrow<Q>,
+    Q: Eq + Ord,
 {
     type Output = Option<V>;
 
@@ -62,8 +70,9 @@ impl<'a, K, Q: ?Sized, V> Remove<&'a Q> for BTreeMap<K, V>
 }
 
 impl<'a, K, Q: ?Sized, V> Get<&'a Q> for BTreeMap<K, V>
-    where K: Eq + Ord + Borrow<Q>,
-          Q: Eq + Ord,
+where
+    K: Eq + Ord + Borrow<Q>,
+    Q: Eq + Ord,
 {
     type Output = V;
 
@@ -73,8 +82,9 @@ impl<'a, K, Q: ?Sized, V> Get<&'a Q> for BTreeMap<K, V>
     }
 }
 impl<'a, K, Q: ?Sized, V> GetMut<&'a Q> for BTreeMap<K, V>
-    where K: Eq + Ord + Borrow<Q>,
-          Q: Eq + Ord,
+where
+    K: Eq + Ord + Borrow<Q>,
+    Q: Eq + Ord,
 {
     #[inline(always)]
     fn get_mut(&mut self, q: &Q) -> Option<&mut Self::Output> {

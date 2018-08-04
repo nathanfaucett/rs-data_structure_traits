@@ -1,11 +1,12 @@
-use alloc::linked_list::LinkedList;
+use alloc::collections::LinkedList;
 
 use super::super::*;
 
-
 impl<T> Collection for LinkedList<T> {
     #[inline(always)]
-    fn len(&self) -> usize { LinkedList::<T>::len(self) }
+    fn len(&self) -> usize {
+        LinkedList::<T>::len(self)
+    }
 }
 
 impl<T> CollectionMut for LinkedList<T> {
@@ -15,11 +16,14 @@ impl<T> CollectionMut for LinkedList<T> {
 }
 
 impl<T> Create<T> for LinkedList<T> {
-
     #[inline(always)]
-    fn create() -> Self { LinkedList::<T>::new() }
+    fn create() -> Self {
+        LinkedList::<T>::new()
+    }
     #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self { LinkedList::<T>::new() }
+    fn create_with_capacity(_: usize) -> Self {
+        LinkedList::<T>::new()
+    }
 
     #[inline(always)]
     fn add_element(mut self, value: T) -> Self {
@@ -65,24 +69,40 @@ impl<T> Deque<T> for LinkedList<T> {
 
 impl<T> Stack<T> for LinkedList<T> {
     #[inline(always)]
-    fn push(&mut self, element: T) { LinkedList::<T>::push_back(self, element) }
+    fn push(&mut self, element: T) {
+        LinkedList::<T>::push_back(self, element)
+    }
     #[inline(always)]
-    fn pop(&mut self) -> Option<T> { LinkedList::<T>::pop_back(self) }
+    fn pop(&mut self) -> Option<T> {
+        LinkedList::<T>::pop_back(self)
+    }
     #[inline(always)]
-    fn top(&self) -> Option<&T> { LinkedList::<T>::back(self) }
+    fn top(&self) -> Option<&T> {
+        LinkedList::<T>::back(self)
+    }
     #[inline(always)]
-    fn top_mut(&mut self) -> Option<&mut T> { LinkedList::<T>::back_mut(self) }
+    fn top_mut(&mut self) -> Option<&mut T> {
+        LinkedList::<T>::back_mut(self)
+    }
 }
 
 impl<T> Queue<T> for LinkedList<T> {
     #[inline(always)]
-    fn enqueue(&mut self, element: T) { LinkedList::<T>::push_back(self, element) }
+    fn enqueue(&mut self, element: T) {
+        LinkedList::<T>::push_back(self, element)
+    }
     #[inline(always)]
-    fn dequeue(&mut self) -> Option<T> { LinkedList::<T>::pop_front(self) }
+    fn dequeue(&mut self) -> Option<T> {
+        LinkedList::<T>::pop_front(self)
+    }
     #[inline(always)]
-    fn peek(&self) -> Option<&T> { LinkedList::<T>::front(self) }
+    fn peek(&self) -> Option<&T> {
+        LinkedList::<T>::front(self)
+    }
     #[inline(always)]
-    fn peek_mut(&mut self) -> Option<&mut T> { LinkedList::<T>::front_mut(self) }
+    fn peek_mut(&mut self) -> Option<&mut T> {
+        LinkedList::<T>::front_mut(self)
+    }
 }
 
 impl<T> Insert<usize, T> for LinkedList<T> {

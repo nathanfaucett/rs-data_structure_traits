@@ -1,7 +1,6 @@
-
-
 pub trait Remove<K>
-    where K: ?Sized,
+where
+    K: ?Sized,
 {
     type Output: ?Sized;
 

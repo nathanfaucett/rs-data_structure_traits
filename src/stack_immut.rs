@@ -1,5 +1,3 @@
-
-
 pub trait StackImmut<T>: Sized {
     fn push(&self, T) -> Self;
     fn pop(&self) -> Self;

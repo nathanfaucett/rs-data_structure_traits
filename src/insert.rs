@@ -1,8 +1,7 @@
-
-
 pub trait Insert<K, V>
-    where K: ?Sized,
-          V: ?Sized,
+where
+    K: ?Sized,
+    V: ?Sized,
 {
     type Output: ?Sized;
 

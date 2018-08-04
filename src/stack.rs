@@ -1,5 +1,3 @@
-
-
 pub trait Stack<T> {
     fn push(&mut self, T);
     fn pop(&mut self) -> Option<T>;

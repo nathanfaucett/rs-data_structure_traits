@@ -1,5 +1,3 @@
-
-
 pub trait Collection {
     fn len(&self) -> usize;
     #[inline(always)]

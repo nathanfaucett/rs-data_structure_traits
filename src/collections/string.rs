@@ -4,18 +4,14 @@ use core::str;
 
 use super::super::*;
 
-
 impl<'a> Collection for &'a str {
-
     #[inline(always)]
     fn len(&self) -> usize {
         str::len(self)
     }
 }
 
-
 impl Collection for String {
-
     #[inline(always)]
     fn len(&self) -> usize {
         String::len(self)
@@ -23,7 +19,6 @@ impl Collection for String {
 }
 
 impl CollectionMut for String {
-
     #[inline(always)]
     fn clear(&mut self) {
         String::clear(self)
@@ -31,11 +26,14 @@ impl CollectionMut for String {
 }
 
 impl Create<char> for String {
-
     #[inline(always)]
-    fn create() -> Self { String::new() }
+    fn create() -> Self {
+        String::new()
+    }
     #[inline(always)]
-    fn create_with_capacity(capacity: usize) -> Self { String::with_capacity(capacity) }
+    fn create_with_capacity(capacity: usize) -> Self {
+        String::with_capacity(capacity)
+    }
 
     #[inline(always)]
     fn add_element(mut self, ch: char) -> Self {

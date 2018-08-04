@@ -1,14 +1,20 @@
 [package]
 name = "data_structure_traits"
 description = "data structure collection traits"
-version = "0.1.8"
+version = "0.1.9"
 authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
+
 keywords = ["data", "structure", "collection", "traits", "no_std"]
 categories = ["data-structures"]
-license = "MIT"
+
+license = "(MIT OR Apache-2.0)"
 readme = "README.md"
 repository = "https://gitlab.com/nathanfaucett/rs-data_structure_traits.git"
 homepage = "https://gitlab.com/nathanfaucett/rs-data_structure_traits"
+
+[lib]
+name = "data_structure_traits"
+path = "src/lib.rs"
 
 [dependencies]
 hashmap_core = { version = "0.1" }

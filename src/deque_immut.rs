@@ -1,5 +1,3 @@
-
-
 pub trait DequeImmut<T>: Sized {
     fn push_front(&self, T) -> Self;
     fn push_back(&self, T) -> Self;

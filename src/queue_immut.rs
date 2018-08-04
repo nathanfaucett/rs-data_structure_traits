@@ -1,5 +1,3 @@
-
-
 pub trait QueueImmut<T>: Sized {
     fn enqueue(&self, T) -> Self;
     fn dequeue(&self) -> Self;

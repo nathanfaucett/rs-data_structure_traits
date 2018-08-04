@@ -1,5 +1,3 @@
-
-
 pub trait Deque<T> {
     fn push_front(&mut self, T);
     fn push_back(&mut self, T);

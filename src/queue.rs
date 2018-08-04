@@ -1,5 +1,3 @@
-
-
 pub trait Queue<T> {
     fn enqueue(&mut self, T);
     fn dequeue(&mut self) -> Option<T>;

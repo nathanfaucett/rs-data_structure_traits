@@ -1,5 +1,3 @@
-
-
 // Count the number of arguments
 // FIXME (rust-lang/rfcs#88) Remove this macro in favor of the `$#$($arg)` syntax
 #[macro_export]
@@ -12,18 +10,22 @@ macro_rules! collection_count_args {
 /// Anything that implements the `Create` trait can be used with this
 /// # Examples
 /// ```
-/// #[macro_use] extern crate data_structure_traits;
-/// #[cfg(not(feature = "use_std"))] extern crate hashmap_core;
+/// #[macro_use]
+/// extern crate data_structure_traits;
+/// #[cfg(not(feature = "use_std"))]
+/// extern crate hashmap_core;
 ///
-/// #[cfg(feature = "use_std")] use std::collections::{HashMap, HashSet};
-/// #[cfg(not(feature = "use_std"))] use hashmap_core::{FnvHashMap as HashMap, FnvHashSet as HashSet};
+/// #[cfg(feature = "use_std")]
+/// use std::collections::{HashMap, HashSet};
+/// #[cfg(not(feature = "use_std"))]
+/// use hashmap_core::{FnvHashMap as HashMap, FnvHashSet as HashSet};
 ///
 /// fn main() {
 ///     // HashMap
-///     let map: HashMap<String, usize> = collection!{
-///         "a".into() => 1,
-///         "b".into() => 2,
-///         "c".into() => 3,
+///     let map: HashMap<&str, usize> = collection!{
+///         "a" => 1,
+///         "b" => 2,
+///         "c" => 3,
 ///     };
 ///     // Vec
 ///     let vec: Vec<usize> = collection![0, 1, 2, 3];

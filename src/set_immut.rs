@@ -2,19 +2,19 @@ use core::borrow::Borrow;
 
 use super::Set;
 
-
-pub trait SetImmut<'a, V, Q>:
-    Set<'a, V, Q> +
-
-    where &'a Self: 'a + IntoIterator<Item = &'a V>,
-          V: 'a + ?Sized + Borrow<Q>,
-          Q: 'a + ?Sized,
-{}
-
+pub trait SetImmut<'a, V, Q>: Set<'a, V, Q>
++
+where
+    &'a Self: 'a + IntoIterator<Item = &'a V>,
+    V: 'a + ?Sized + Borrow<Q>,
+    Q: 'a + ?Sized,
+{
+}
 
 impl<'a, V, Q, T> SetImmut<'a, V, Q> for T
-    where T: 'a + Set<'a, V, Q>,
-          &'a T: 'a + IntoIterator<Item = &'a V>,
-          V: 'a + ?Sized + Borrow<Q>,
-          Q: 'a + ?Sized,
+where
+    T: 'a + Set<'a, V, Q>,
+    &'a T: 'a + IntoIterator<Item = &'a V>,
+    V: 'a + ?Sized + Borrow<Q>,
+    Q: 'a + ?Sized,
 {}

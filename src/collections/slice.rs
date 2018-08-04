@@ -1,12 +1,9 @@
-use core::slice::SliceExt;
-
 use super::super::*;
-
 
 impl<T> Collection for [T] {
     #[inline(always)]
     fn len(&self) -> usize {
-        SliceExt::len(self)
+        <[T]>::len(self)
     }
 }
 

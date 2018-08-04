@@ -1,15 +1,17 @@
 use core::borrow::Borrow;
-use core::hash::{Hash, BuildHasher};
+use core::hash::{BuildHasher, Hash};
 
-#[cfg(feature = "use_std")] use std::collections::hash_map::HashMap;
-#[cfg(not(feature = "use_std"))] use hashmap_core::HashMap;
+#[cfg(not(feature = "use_std"))]
+use hashmap_core::HashMap;
+#[cfg(feature = "use_std")]
+use std::collections::hash_map::HashMap;
 
 use super::super::*;
 
-
 impl<K, V, S> Collection for HashMap<K, V, S>
-    where K: Eq + Hash,
-          S: BuildHasher,
+where
+    K: Eq + Hash,
+    S: BuildHasher,
 {
     #[inline(always)]
     fn len(&self) -> usize {
@@ -18,8 +20,9 @@ impl<K, V, S> Collection for HashMap<K, V, S>
 }
 
 impl<K, V, S> CollectionMut for HashMap<K, V, S>
-    where K: Eq + Hash,
-          S: BuildHasher,
+where
+    K: Eq + Hash,
+    S: BuildHasher,
 {
     #[inline(always)]
     fn clear(&mut self) {
@@ -28,14 +31,18 @@ impl<K, V, S> CollectionMut for HashMap<K, V, S>
 }
 
 impl<K, V, S> Create<(K, V)> for HashMap<K, V, S>
-    where K: Eq + Hash,
-          S: Default + BuildHasher,
+where
+    K: Eq + Hash,
+    S: Default + BuildHasher,
 {
-
     #[inline(always)]
-    fn create() -> Self { HashMap::<K, V, S>::default() }
+    fn create() -> Self {
+        HashMap::<K, V, S>::default()
+    }
     #[inline(always)]
-    fn create_with_capacity(_: usize) -> Self { HashMap::<K, V, S>::default() }
+    fn create_with_capacity(_: usize) -> Self {
+        HashMap::<K, V, S>::default()
+    }
 
     #[inline(always)]
     fn add_element(mut self, (key, value): (K, V)) -> Self {
@@ -45,8 +52,9 @@ impl<K, V, S> Create<(K, V)> for HashMap<K, V, S>
 }
 
 impl<'a, K, V, S> Insert<K, V> for HashMap<K, V, S>
-    where K: Eq + Hash,
-          S: BuildHasher
+where
+    K: Eq + Hash,
+    S: BuildHasher,
 {
     type Output = Option<V>;
 
@@ -57,9 +65,10 @@ impl<'a, K, V, S> Insert<K, V> for HashMap<K, V, S>
 }
 
 impl<'a, K, Q: ?Sized, V, S> Remove<&'a Q> for HashMap<K, V, S>
-    where K: Eq + Hash + Borrow<Q>,
-          Q: Eq + Hash,
-          S: BuildHasher
+where
+    K: Eq + Hash + Borrow<Q>,
+    Q: Eq + Hash,
+    S: BuildHasher,
 {
     type Output = Option<V>;
 
@@ -70,9 +79,10 @@ impl<'a, K, Q: ?Sized, V, S> Remove<&'a Q> for HashMap<K, V, S>
 }
 
 impl<'a, K, Q: ?Sized, V, S> Get<&'a Q> for HashMap<K, V, S>
-    where K: Eq + Hash + Borrow<Q>,
-          Q: Eq + Hash,
-          S: BuildHasher,
+where
+    K: Eq + Hash + Borrow<Q>,
+    Q: Eq + Hash,
+    S: BuildHasher,
 {
     type Output = V;
 
@@ -82,9 +92,10 @@ impl<'a, K, Q: ?Sized, V, S> Get<&'a Q> for HashMap<K, V, S>
     }
 }
 impl<'a, K, Q: ?Sized, V, S> GetMut<&'a Q> for HashMap<K, V, S>
-    where K: Eq + Hash + Borrow<Q>,
-          Q: Eq + Hash,
-          S: BuildHasher,
+where
+    K: Eq + Hash + Borrow<Q>,
+    Q: Eq + Hash,
+    S: BuildHasher,
 {
     #[inline(always)]
     fn get_mut(&mut self, q: &Q) -> Option<&mut Self::Output> {

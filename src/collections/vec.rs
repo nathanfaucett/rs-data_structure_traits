@@ -2,7 +2,6 @@ use alloc::vec::Vec;
 
 use super::super::*;
 
-
 impl<T> Collection for Vec<T> {
     #[inline(always)]
     fn len(&self) -> usize {
@@ -18,11 +17,14 @@ impl<T> CollectionMut for Vec<T> {
 }
 
 impl<T> Create<T> for Vec<T> {
-
     #[inline(always)]
-    fn create() -> Self { Vec::<T>::new() }
+    fn create() -> Self {
+        Vec::<T>::new()
+    }
     #[inline(always)]
-    fn create_with_capacity(capacity: usize) -> Self { Vec::<T>::with_capacity(capacity) }
+    fn create_with_capacity(capacity: usize) -> Self {
+        Vec::<T>::with_capacity(capacity)
+    }
 
     #[inline(always)]
     fn add_element(mut self, value: T) -> Self {
@@ -93,24 +95,40 @@ impl<T> Remove<usize> for Vec<T> {
 
 impl<T> Stack<T> for Vec<T> {
     #[inline(always)]
-    fn push(&mut self, element: T) { Vec::<T>::push_front(self, element) }
+    fn push(&mut self, element: T) {
+        Vec::<T>::push_front(self, element)
+    }
     #[inline(always)]
-    fn pop(&mut self) -> Option<T> { Vec::<T>::pop_front(self) }
+    fn pop(&mut self) -> Option<T> {
+        Vec::<T>::pop_front(self)
+    }
     #[inline(always)]
-    fn top(&self) -> Option<&T> { Vec::<T>::front(self) }
+    fn top(&self) -> Option<&T> {
+        Vec::<T>::front(self)
+    }
     #[inline(always)]
-    fn top_mut(&mut self) -> Option<&mut T> { Vec::<T>::front_mut(self) }
+    fn top_mut(&mut self) -> Option<&mut T> {
+        Vec::<T>::front_mut(self)
+    }
 }
 
 impl<T> Queue<T> for Vec<T> {
     #[inline(always)]
-    fn enqueue(&mut self, element: T) { Vec::<T>::push_back(self, element) }
+    fn enqueue(&mut self, element: T) {
+        Vec::<T>::push_back(self, element)
+    }
     #[inline(always)]
-    fn dequeue(&mut self) -> Option<T> { Vec::<T>::pop_front(self) }
+    fn dequeue(&mut self) -> Option<T> {
+        Vec::<T>::pop_front(self)
+    }
     #[inline(always)]
-    fn peek(&self) -> Option<&T> { Vec::<T>::front(self) }
+    fn peek(&self) -> Option<&T> {
+        Vec::<T>::front(self)
+    }
     #[inline(always)]
-    fn peek_mut(&mut self) -> Option<&mut T> { Vec::<T>::front_mut(self) }
+    fn peek_mut(&mut self) -> Option<&mut T> {
+        Vec::<T>::front_mut(self)
+    }
 }
 
 impl<T> Get<usize> for Vec<T> {
