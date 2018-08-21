@@ -1,12 +1,12 @@
-#![feature(alloc)]
+#![cfg_attr(not(feature = "std"), feature(alloc))]
 #![no_std]
 
+#[cfg(not(feature = "std"))]
+extern crate alloc;
 #[cfg(feature = "hashmap_core")]
 extern crate hashmap_core;
 #[cfg(feature = "std")]
 extern crate std;
-
-extern crate alloc;
 
 mod collection;
 mod collection_mut;

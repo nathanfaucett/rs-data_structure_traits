@@ -1,4 +1,7 @@
+#[cfg(not(feature = "std"))]
 use alloc::collections::LinkedList;
+#[cfg(feature = "std")]
+use std::collections::LinkedList;
 
 use super::super::*;
 

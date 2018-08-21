@@ -1,6 +1,6 @@
 [[package]]
 name = "data_structure_traits"
-version = "0.1.10"
+version = "0.1.11"
 dependencies = [
  "hashmap_core 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)",
 ]

@@ -1,3 +1,4 @@
+mod binary_heap;
 mod btree_map;
 mod btree_set;
 mod hash_map;
@@ -6,3 +7,4 @@ mod linked_list;
 mod slice;
 mod string;
 mod vec;
+mod vec_deque;

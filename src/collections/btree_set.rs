@@ -1,4 +1,7 @@
+#[cfg(not(feature = "std"))]
 use alloc::collections::BTreeSet;
+#[cfg(feature = "std")]
+use std::collections::BTreeSet;
 
 use core::borrow::Borrow;
 
@@ -53,6 +56,6 @@ where
 
     #[inline(always)]
     fn get(&self, q: &Q) -> Option<&Self::Output> {
-        BTreeSet::get(self, q)
+        BTreeSet::<V>::get(self, q)
     }
 }
