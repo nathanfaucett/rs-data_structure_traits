@@ -1,6 +1,6 @@
 # data_structure_traits
 
-[![docs](https://docs.rs/crate/data_structure_traits)](https://docs.rs/data_structure_traits/badge.svg)
+[![docs](https://docs.rs/data_structure_traits/badge.svg)](https://docs.rs/crate/data_structure_traits)
 
 data structure collection traits
 
