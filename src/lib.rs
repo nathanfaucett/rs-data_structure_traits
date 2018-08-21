@@ -1,9 +1,9 @@
 #![feature(alloc)]
 #![no_std]
 
-#[cfg(not(feature = "use_std"))]
+#[cfg(feature = "hashmap_core")]
 extern crate hashmap_core;
-#[cfg(feature = "use_std")]
+#[cfg(feature = "std")]
 extern crate std;
 
 extern crate alloc;
