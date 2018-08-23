@@ -47,7 +47,7 @@ where
     }
 }
 
-impl<'a, K, V> Insert<K, V> for BTreeMap<K, V>
+impl<'a, K, V> InsertMut<K, V> for BTreeMap<K, V>
 where
     K: Eq + Ord,
 {
@@ -59,7 +59,7 @@ where
     }
 }
 
-impl<'a, K, Q: ?Sized, V> Remove<&'a Q> for BTreeMap<K, V>
+impl<'a, K, Q: ?Sized, V> RemoveMut<&'a Q> for BTreeMap<K, V>
 where
     K: Eq + Ord + Borrow<Q>,
     Q: Eq + Ord,

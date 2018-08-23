@@ -20,17 +20,11 @@ where
     collection.get(index)
 }
 
-fn count_len<'a, S, T>(seq: &'a S) -> usize
+fn len<'a, C>(c: &'a C) -> usize
 where
-    S: Seq<'a, T>,
-    &'a S: IntoIterator<Item = &'a T>,
-    T: 'a,
+    C: 'a + Collection,
 {
-    let mut count = 0;
-    for _ in seq {
-        count += 1;
-    }
-    count
+    c.len()
 }
 
 #[test]
@@ -52,7 +46,7 @@ fn test_get() {
 }
 
 #[test]
-fn test_count_len() {
+fn test_len() {
     let vec: Vec<usize> = collection![0, 1, 2, 3];
-    assert_eq!(count_len(&vec), 4);
+    assert_eq!(len(&vec), 4);
 }

@@ -36,7 +36,7 @@ impl<T> Create<T> for VecDeque<T> {
     }
 }
 
-impl<T> Deque<T> for VecDeque<T> {
+impl<T> DequeMut<T> for VecDeque<T> {
     #[inline(always)]
     fn push_front(&mut self, element: T) {
         VecDeque::<T>::insert(self, 0, element)
@@ -78,7 +78,7 @@ impl<T> Deque<T> for VecDeque<T> {
     }
 }
 
-impl<T> Insert<usize, T> for VecDeque<T> {
+impl<T> InsertMut<usize, T> for VecDeque<T> {
     type Output = ();
 
     #[inline(always)]
@@ -87,7 +87,7 @@ impl<T> Insert<usize, T> for VecDeque<T> {
     }
 }
 
-impl<T> Remove<usize> for VecDeque<T> {
+impl<T> RemoveMut<usize> for VecDeque<T> {
     type Output = Option<T>;
 
     #[inline(always)]
@@ -96,7 +96,7 @@ impl<T> Remove<usize> for VecDeque<T> {
     }
 }
 
-impl<T> Stack<T> for VecDeque<T> {
+impl<T> StackMut<T> for VecDeque<T> {
     #[inline(always)]
     fn push(&mut self, element: T) {
         VecDeque::<T>::push_front(self, element)
@@ -115,7 +115,7 @@ impl<T> Stack<T> for VecDeque<T> {
     }
 }
 
-impl<T> Queue<T> for VecDeque<T> {
+impl<T> QueueMut<T> for VecDeque<T> {
     #[inline(always)]
     fn enqueue(&mut self, element: T) {
         VecDeque::<T>::push_back(self, element)

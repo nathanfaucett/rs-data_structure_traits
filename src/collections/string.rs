@@ -45,7 +45,7 @@ impl Create<char> for String {
     }
 }
 
-impl Insert<usize, char> for String {
+impl InsertMut<usize, char> for String {
     type Output = ();
 
     #[inline(always)]
@@ -54,7 +54,7 @@ impl Insert<usize, char> for String {
     }
 }
 
-impl Remove<usize> for String {
+impl RemoveMut<usize> for String {
     type Output = char;
 
     #[inline(always)]

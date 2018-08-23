@@ -1,6 +1,10 @@
-pub trait Queue<T> {
-    fn enqueue(&mut self, T);
-    fn dequeue(&mut self) -> Option<T>;
+pub trait Queue<T>: Sized {
+    fn enqueue(&self, T) -> Self;
+    fn dequeue(&self) -> Self;
     fn peek(&self) -> Option<&T>;
-    fn peek_mut(&mut self) -> Option<&mut T>;
+
+    #[inline(always)]
+    fn dequeue_and_peek(&self) -> (Self, Option<&T>) {
+        (self.dequeue(), self.peek())
+    }
 }

@@ -1,17 +1,14 @@
 use core::borrow::Borrow;
 
-use super::{CollectionMut, GetMut, Insert, Map, Remove};
+use super::{CollectionMut, GetMut, InsertMut, Map, RemoveMut};
 
 pub trait MapMut<'a, K, Q, V>:
     Map<'a, K, Q, V>
     + CollectionMut
     + GetMut<&'a Q, Output = V>
-    + Insert<K, V, Output = Option<V>>
-    + Remove<K, Output = Option<V>>
-+
+    + InsertMut<K, V, Output = Option<V>>
+    + RemoveMut<K, Output = Option<V>>
 where
-    &'a Self: 'a + IntoIterator<Item = (&'a K, &'a V)>,
-    &'a mut Self: 'a + IntoIterator<Item = (&'a K, &'a mut V)>,
     K: 'a + ?Sized + Borrow<Q>,
     Q: 'a + ?Sized,
     V: 'a + Sized,
@@ -24,10 +21,8 @@ where
         + Map<'a, K, Q, V>
         + CollectionMut
         + GetMut<&'a Q, Output = V>
-        + Insert<K, V, Output = Option<V>>
-        + Remove<K, Output = Option<V>>,
-    &'a T: 'a + IntoIterator<Item = (&'a K, &'a V)>,
-    &'a mut T: 'a + IntoIterator<Item = (&'a K, &'a mut V)>,
+        + InsertMut<K, V, Output = Option<V>>
+        + RemoveMut<K, Output = Option<V>>,
     K: 'a + ?Sized + Borrow<Q>,
     Q: 'a + ?Sized,
     V: 'a + Sized,

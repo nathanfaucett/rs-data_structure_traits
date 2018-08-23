@@ -1,15 +1,12 @@
-use super::{CollectionMut, GetMut, Insert, Remove, Seq};
+use super::{CollectionMut, GetMut, InsertMut, RemoveMut, Seq};
 
 pub trait SeqMut<'a, V: 'a>:
     Seq<'a, V>
     + CollectionMut
     + GetMut<usize, Output = V>
-    + Insert<usize, V, Output = ()>
-    + Remove<usize, Output = V>
-+
+    + InsertMut<usize, V, Output = ()>
+    + RemoveMut<usize, Output = V>
 where
-    &'a Self: 'a + IntoIterator<Item = &'a V>,
-    &'a mut Self: 'a + IntoIterator<Item = &'a mut V>,
     V: 'a + ?Sized,
 {
 }
@@ -20,9 +17,7 @@ where
         + Seq<'a, V>
         + CollectionMut
         + GetMut<usize, Output = V>
-        + Insert<usize, V, Output = ()>
-        + Remove<usize, Output = V>,
-    &'a T: 'a + IntoIterator<Item = &'a V>,
-    &'a mut T: 'a + IntoIterator<Item = &'a mut V>,
+        + InsertMut<usize, V, Output = ()>
+        + RemoveMut<usize, Output = V>,
     V: 'a + ?Sized,
 {}
