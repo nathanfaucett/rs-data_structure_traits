@@ -1,11 +1,7 @@
-pub trait Stack<T>: Sized {
-    fn push(&self, T) -> Self;
-    fn pop(&self) -> Self;
+pub trait Stack<T> {
+    fn push(&mut self, T);
+    fn pop(&mut self) -> Option<T>;
 
     fn top(&self) -> Option<&T>;
-
-    #[inline(always)]
-    fn pop_and_top(&self) -> (Self, Option<&T>) {
-        (self.pop(), self.top())
-    }
+    fn top_mut(&mut self) -> Option<&mut T>;
 }

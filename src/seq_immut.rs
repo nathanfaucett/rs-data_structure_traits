@@ -1,7 +1,6 @@
-use super::{Insert, Remove, Seq};
+use super::{InsertImmut, RemoveImmut, Seq};
 
-pub trait SeqImmut<'a, V: 'a>:
-    Seq<'a, V> + Insert<usize, V, Output = ()> + Remove<usize, Output = V>
+pub trait SeqImmut<'a, V: 'a>: Seq<'a, V> + InsertImmut<usize, V> + RemoveImmut<usize>
 where
     V: 'a + ?Sized,
 {
@@ -9,6 +8,6 @@ where
 
 impl<'a, V, T> SeqImmut<'a, V> for T
 where
-    T: 'a + Seq<'a, V> + Insert<usize, V, Output = ()> + Remove<usize, Output = V>,
+    T: 'a + Seq<'a, V> + InsertImmut<usize, V> + RemoveImmut<usize>,
     V: 'a + ?Sized,
 {}

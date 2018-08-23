@@ -44,3 +44,15 @@ where
         self
     }
 }
+
+impl<V> Add<V> for BinaryHeap<V>
+where
+    V: Ord,
+{
+    type Output = ();
+
+    #[inline(always)]
+    fn add(&mut self, v: V) -> Self::Output {
+        BinaryHeap::<V>::push(self, v)
+    }
+}

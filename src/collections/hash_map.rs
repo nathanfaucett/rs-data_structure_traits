@@ -48,7 +48,7 @@ macro_rules! impl_hash_map {
             }
         }
 
-        impl<'a, K, V, S> InsertMut<K, V> for $HashMap<K, V, S>
+        impl<'a, K, V, S> Insert<K, V> for $HashMap<K, V, S>
         where
             K: Eq + Hash,
             S: BuildHasher,
@@ -61,7 +61,20 @@ macro_rules! impl_hash_map {
             }
         }
 
-        impl<'a, K, Q: ?Sized, V, S> RemoveMut<&'a Q> for $HashMap<K, V, S>
+        impl<K, V, S> Add<(K, V)> for $HashMap<K, V, S>
+        where
+            K: Eq + Hash,
+            S: BuildHasher,
+        {
+            type Output = Option<V>;
+
+            #[inline(always)]
+            fn add(&mut self, (k, v): (K, V)) -> Self::Output {
+                $HashMap::<K, V, S>::insert(self, k, v)
+            }
+        }
+
+        impl<'a, K, Q: ?Sized, V, S> Remove<&'a Q> for $HashMap<K, V, S>
         where
             K: Eq + Hash + Borrow<Q>,
             Q: Eq + Hash,

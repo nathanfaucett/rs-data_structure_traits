@@ -45,7 +45,7 @@ impl Create<char> for String {
     }
 }
 
-impl InsertMut<usize, char> for String {
+impl Insert<usize, char> for String {
     type Output = ();
 
     #[inline(always)]
@@ -54,7 +54,16 @@ impl InsertMut<usize, char> for String {
     }
 }
 
-impl RemoveMut<usize> for String {
+impl Add<char> for String {
+    type Output = ();
+
+    #[inline(always)]
+    fn add(&mut self, v: char) -> Self::Output {
+        String::push(self, v);
+    }
+}
+
+impl Remove<usize> for String {
     type Output = char;
 
     #[inline(always)]

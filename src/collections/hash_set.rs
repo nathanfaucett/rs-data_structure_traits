@@ -48,16 +48,30 @@ macro_rules! impl_hash_set {
             }
         }
 
-        impl<'a, Q, V> Get<&'a Q> for $HashSet<V>
+        impl<'a, Q, V, S> Get<&'a Q> for $HashSet<V, S>
         where
             Q: Eq + Hash + ?Sized,
             V: Eq + Hash + Borrow<Q>,
+            S: BuildHasher,
         {
             type Output = V;
 
             #[inline(always)]
             fn get(&self, q: &Q) -> Option<&Self::Output> {
                 $HashSet::get(self, q)
+            }
+        }
+
+        impl<V, S> Add<V> for $HashSet<V, S>
+        where
+            V: Eq + Hash,
+            S: BuildHasher,
+        {
+            type Output = bool;
+
+            #[inline(always)]
+            fn add(&mut self, v: V) -> Self::Output {
+                $HashSet::<V, S>::insert(self, v)
             }
         }
     };

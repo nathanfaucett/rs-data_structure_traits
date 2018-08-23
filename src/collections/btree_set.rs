@@ -47,6 +47,18 @@ where
     }
 }
 
+impl<V> Add<V> for BTreeSet<V>
+where
+    V: Eq + Ord,
+{
+    type Output = bool;
+
+    #[inline(always)]
+    fn add(&mut self, v: V) -> Self::Output {
+        BTreeSet::<V>::insert(self, v)
+    }
+}
+
 impl<'a, Q, V> Get<&'a Q> for BTreeSet<V>
 where
     Q: Eq + Ord + ?Sized,

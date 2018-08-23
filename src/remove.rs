@@ -2,5 +2,7 @@ pub trait Remove<K>
 where
     K: ?Sized,
 {
-    fn remove(&self, K) -> Self;
+    type Output: ?Sized;
+
+    fn remove(&mut self, K) -> Self::Output;
 }
